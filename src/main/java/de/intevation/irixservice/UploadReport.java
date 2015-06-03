@@ -54,6 +54,9 @@ public class UploadReport implements UploadReportInterface {
     /** Path to the Dokpool extension xsd file. */
     private static final String DOKPOOL_SCHEMA_LOC = "/WEB-INF/irix-schema/Dokpool-2.xsd";
 
+    /** The element name to identify a DokpoolMeta element. */
+    private static final String DOKPOOL_ELEMENT_NAME = "DokpoolMeta:DokpoolMeta";
+
     @Resource
     private WebServiceContext context;
 
@@ -140,6 +143,10 @@ public class UploadReport implements UploadReportInterface {
     /** Validate element against the dokpool meta data schema. */
     protected void validateMeta(Element element)
         throws SAXException, JAXBException {
+        if (!DOKPOOL_ELEMENT_NAME.equals(element.getTagName())) {
+            log.debug("Ignoring Annotation element: " + element.getTagName());
+            return;
+        }
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         Schema schema = schemaFactory.newSchema(dokpoolSchemaFile);
         JAXBContext jaxbContext = JAXBContext.newInstance(DokpoolMeta.class);
@@ -161,9 +168,17 @@ public class UploadReport implements UploadReportInterface {
             marshaller.setSchema(schema);
             marshaller.marshal(new ObjectFactory().createReport(report), new DefaultHandler());
             AnnexesType annex = report.getAnnexes();
-            for (AnnotationType anno: annex.getAnnotation()) {
-                for (Element ele: anno.getAny()) {
-                    validateMeta(ele);
+            if (annex.getAnnotation() != null) {
+                for (AnnotationType anno: annex.getAnnotation()) {
+                    if (anno.getAny() == null) {
+                        continue;
+                    }
+                    for (Element ele: anno.getAny()) {
+                        if (ele == null) {
+                            continue;
+                        }
+                        validateMeta(ele);
+                    }
                 }
             }
         } catch (SAXException | JAXBException e) {
