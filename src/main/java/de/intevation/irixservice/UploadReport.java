@@ -57,14 +57,14 @@ public class UploadReport implements UploadReportInterface {
         mInitialized = false;
     }
 
-    protected void init() {
+    protected void init() throws UploadReportException {
         ServletContext sc;
         try {
             sc = (ServletContext) context.getMessageContext().get(
                 MessageContext.SERVLET_CONTEXT);
         } catch (IllegalStateException e) {
             System.err.println("Failed to get servlet context.");
-            return;
+            throw new UploadReportException("Failed to get servlet context.");
         }
 
         String file = sc.getInitParameter("log4j-properties");
@@ -72,7 +72,7 @@ public class UploadReport implements UploadReportInterface {
         PropertyConfigurator.configure(log4jProperties);
 
         outputDir = sc.getInitParameter("storage-dir");
-        log.debug("uUsing: " + outputDir + " as Storage location.");
+        log.debug("Using: " + outputDir + " as Storage location.");
 
         irixSchemaFile = new File(sc.getRealPath(IRIX_SCHEMA_LOC));
 
@@ -85,6 +85,7 @@ public class UploadReport implements UploadReportInterface {
                 theDir.mkdir();
             } catch(SecurityException se){
                 log.error("Failed to create output directory. All requests to the service will be ignored.");
+                throw new UploadReportException("Service misconfigured.");
             }
         }
         mInitialized = true;
@@ -127,22 +128,15 @@ public class UploadReport implements UploadReportInterface {
     /** Validate date a report against the IRIX Schema. */
     protected void validateReport(ReportType report) throws UploadReportException {
         try {
-            log.debug("Starting schema validation.");
             SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            log.debug("Starting schema validation.");
             Schema schema = schemaFactory.newSchema(irixSchemaFile);
-            log.debug("after schema creation.");
             JAXBContext jaxbContext = JAXBContext.newInstance(ReportType.class);
-            log.debug("After context create.");
 
             Marshaller marshaller = jaxbContext.createMarshaller();
-            log.debug("marshaller created withs schema: " + schema);
             marshaller.setSchema(schema);
-            log.debug("Set schema.");
             marshaller.marshal(new ObjectFactory().createReport(report), new DefaultHandler());
-            log.debug("After marshalling");
         } catch (SAXException | JAXBException e) {
-            log.debug("Exception: " + e);
+            log.debug("Validation failed: " + e);
             throw new UploadReportException("Failed to validate report: " + e, e);
         }
     }
