@@ -19,6 +19,10 @@ import javax.xml.XMLConstants;
 
 import org.iaea._2012.irix.format.ReportType;
 import org.iaea._2012.irix.format.ObjectFactory;
+import org.iaea._2012.irix.format.annexes.AnnexesType;
+import org.iaea._2012.irix.format.annexes.AnnotationType;
+
+import de.bfs.irix.extensions.dokpool.DokpoolMeta;
 
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.SAXException;
@@ -30,19 +34,25 @@ import java.io.File;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 import javax.servlet.ServletContext;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+import org.w3c.dom.Element;
+
 @WebService(endpointInterface = "de.intevation.irixservice.UploadReportInterface")
 public class UploadReport implements UploadReportInterface {
 
     private static Logger log = Logger.getLogger(UploadReport.class);
 
-    /** Path tho the irixSchema xsd file. */
+    /** Path to the irixSchema xsd file. */
     private static final String IRIX_SCHEMA_LOC = "/WEB-INF/irix-schema/IRIX.xsd";
+
+    /** Path to the Dokpool extension xsd file. */
+    private static final String DOKPOOL_SCHEMA_LOC = "/WEB-INF/irix-schema/Dokpool-2.xsd";
 
     @Resource
     private WebServiceContext context;
@@ -50,6 +60,7 @@ public class UploadReport implements UploadReportInterface {
     String outputDir;
 
     File irixSchemaFile;
+    File dokpoolSchemaFile;
 
     boolean mInitialized;
 
@@ -64,7 +75,7 @@ public class UploadReport implements UploadReportInterface {
                 MessageContext.SERVLET_CONTEXT);
         } catch (IllegalStateException e) {
             System.err.println("Failed to get servlet context.");
-            throw new UploadReportException("Failed to get servlet context.");
+            throw new UploadReportException("Failed to get servlet context.", e);
         }
 
         String file = sc.getInitParameter("log4j-properties");
@@ -75,6 +86,7 @@ public class UploadReport implements UploadReportInterface {
         log.debug("Using: " + outputDir + " as Storage location.");
 
         irixSchemaFile = new File(sc.getRealPath(IRIX_SCHEMA_LOC));
+        dokpoolSchemaFile = new File(sc.getRealPath(DOKPOOL_SCHEMA_LOC));
 
         File theDir = new File(outputDir);
         if (!theDir.exists()) {
@@ -85,7 +97,7 @@ public class UploadReport implements UploadReportInterface {
                 theDir.mkdir();
             } catch(SecurityException se){
                 log.error("Failed to create output directory. All requests to the service will be ignored.");
-                throw new UploadReportException("Service misconfigured.");
+                throw new UploadReportException("Service misconfigured.", se);
             }
         }
         mInitialized = true;
@@ -125,6 +137,19 @@ public class UploadReport implements UploadReportInterface {
         return;
     }
 
+    /** Validate element against the dokpool meta data schema. */
+    protected void validateMeta(Element element)
+        throws SAXException, JAXBException {
+        SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        Schema schema = schemaFactory.newSchema(dokpoolSchemaFile);
+        JAXBContext jaxbContext = JAXBContext.newInstance(DokpoolMeta.class);
+
+        Unmarshaller u = jaxbContext.createUnmarshaller();
+        u.setSchema(schema);
+
+        Object dokMetaObj = u.unmarshal(element.getOwnerDocument());
+    }
+
     /** Validate date a report against the IRIX Schema. */
     protected void validateReport(ReportType report) throws UploadReportException {
         try {
@@ -135,6 +160,12 @@ public class UploadReport implements UploadReportInterface {
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setSchema(schema);
             marshaller.marshal(new ObjectFactory().createReport(report), new DefaultHandler());
+            AnnexesType annex = report.getAnnexes();
+            for (AnnotationType anno: annex.getAnnotation()) {
+                for (Element ele: anno.getAny()) {
+                    validateMeta(ele);
+                }
+            }
         } catch (SAXException | JAXBException e) {
             log.debug("Validation failed: " + e);
             throw new UploadReportException("Failed to validate report: " + e, e);
