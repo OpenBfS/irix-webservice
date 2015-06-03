@@ -1,8 +1,0 @@
-HTTP/1.1 500 Internal Server Error
-Server: Apache-Coyote/1.1
-Content-Type: text/html
-Transfer-Encoding: chunked
-Date: Thu, 28 May 2015 16:09:05 GMT
-Connection: close
-
-Could not read jsonObject from request
