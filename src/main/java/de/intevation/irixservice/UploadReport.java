@@ -13,8 +13,15 @@ import javax.annotation.Resource;
 import javax.xml.ws.WebServiceContext;
 import javax.xml.ws.handler.MessageContext;
 
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.XMLConstants;
+
 import org.iaea._2012.irix.format.ReportType;
 import org.iaea._2012.irix.format.ObjectFactory;
+
+import org.xml.sax.helpers.DefaultHandler;
+import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,10 +41,15 @@ public class UploadReport implements UploadReportInterface {
 
     private static Logger log = Logger.getLogger(UploadReport.class);
 
+    /** Path tho the irixSchema xsd file. */
+    private static final String IRIX_SCHEMA_LOC = "/WEB-INF/irix-schema/IRIX.xsd";
+
     @Resource
     private WebServiceContext context;
 
     String outputDir;
+
+    File irixSchemaFile;
 
     boolean mInitialized;
 
@@ -60,7 +72,9 @@ public class UploadReport implements UploadReportInterface {
         PropertyConfigurator.configure(log4jProperties);
 
         outputDir = sc.getInitParameter("storage-dir");
-        log.debug("Using: " + outputDir + " as Storage location.");
+        log.debug("uUsing: " + outputDir + " as Storage location.");
+
+        irixSchemaFile = new File(sc.getRealPath(IRIX_SCHEMA_LOC));
 
         File theDir = new File(outputDir);
         if (!theDir.exists()) {
@@ -77,11 +91,13 @@ public class UploadReport implements UploadReportInterface {
     }
 
     @Override
-    public void uploadReport(ReportType report) {
+    public void uploadReport(ReportType report) throws UploadReportException {
         if (!mInitialized) {
             // Necessary because the servlet context is not accessible in ctor
             init();
         }
+        validateReport(report);
+
         String fileName = report.getIdentification().getReportUUID() + ".xml";
         try {
             PrintWriter writer = new PrintWriter(outputDir + "/" + fileName, "UTF-8");
@@ -94,8 +110,11 @@ public class UploadReport implements UploadReportInterface {
             writer.close();
         } catch (IOException e) {
             log.error("Failed to write report to file: '" + outputDir + "/" + fileName + "'");
+            throw new UploadReportException("Failed to write report to file: '" + outputDir +
+                    "/" + fileName + "'", e);
         } catch (JAXBException e) {
             log.error("Failed to handle requested report." + e.toString());
+            throw new UploadReportException("Failed to parse the report.", e);
         }
 
         if (outputDir == null) {
@@ -103,5 +122,28 @@ public class UploadReport implements UploadReportInterface {
             return;
         }
         return;
+    }
+
+    /** Validate date a report against the IRIX Schema. */
+    protected void validateReport(ReportType report) throws UploadReportException {
+        try {
+            log.debug("Starting schema validation.");
+            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            log.debug("Starting schema validation.");
+            Schema schema = schemaFactory.newSchema(irixSchemaFile);
+            log.debug("after schema creation.");
+            JAXBContext jaxbContext = JAXBContext.newInstance(ReportType.class);
+            log.debug("After context create.");
+
+            Marshaller marshaller = jaxbContext.createMarshaller();
+            log.debug("marshaller created withs schema: " + schema);
+            marshaller.setSchema(schema);
+            log.debug("Set schema.");
+            marshaller.marshal(new ObjectFactory().createReport(report), new DefaultHandler());
+            log.debug("After marshalling");
+        } catch (SAXException | JAXBException e) {
+            log.debug("Exception: " + e);
+            throw new UploadReportException("Failed to validate report: " + e, e);
+        }
     }
 }

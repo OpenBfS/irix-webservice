@@ -48,8 +48,8 @@
                 </executions>
                 <configuration>
                     <sources>
-                        <source>irix-schema/IRIX.xsd</source>
-                        <source>irix-schema/Dokpool-2.xsd</source>
+                        <source>${basedir}/src/main/webapp/WEB-INF/irix-schema/IRIX.xsd</source>
+                        <source>${basedir}/src/main/webapp/WEB-INF/irix-schema/Dokpool-2.xsd</source>
                     </sources>
                 </configuration>
             </plugin>

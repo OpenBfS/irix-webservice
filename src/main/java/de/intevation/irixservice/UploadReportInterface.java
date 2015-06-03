@@ -19,5 +19,5 @@ import org.iaea._2012.irix.format.ReportType;
 public interface UploadReportInterface {
 
     @WebMethod
-    void uploadReport(ReportType value);
+    void uploadReport(ReportType value) throws UploadReportException;
 }
