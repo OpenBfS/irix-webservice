@@ -55,20 +55,20 @@ public class UploadReport implements UploadReportInterface {
     private static final String DOKPOOL_SCHEMA_LOC = "/WEB-INF/irix-schema/Dokpool-2.xsd";
 
     /** The element name to identify a DokpoolMeta element. */
-    private static final String DOKPOOL_ELEMENT_NAME = "DokpoolMeta:DokpoolMeta";
+    private static final String DOKPOOL_ELEMENT_NAME = "DokpoolMeta";
 
     @Resource
     private WebServiceContext context;
 
-    String outputDir;
+    public String outputDir;
 
-    File irixSchemaFile;
-    File dokpoolSchemaFile;
+    public File irixSchemaFile;
+    public File dokpoolSchemaFile;
 
-    boolean mInitialized;
+    public boolean initialized;
 
     public UploadReport() {
-        mInitialized = false;
+        initialized = false;
     }
 
     protected void init() throws UploadReportException {
@@ -91,6 +91,10 @@ public class UploadReport implements UploadReportInterface {
         irixSchemaFile = new File(sc.getRealPath(IRIX_SCHEMA_LOC));
         dokpoolSchemaFile = new File(sc.getRealPath(DOKPOOL_SCHEMA_LOC));
 
+        initialized = true;
+    }
+
+    protected void createOutputDir() throws UploadReportException {
         File theDir = new File(outputDir);
         if (!theDir.exists()) {
             log.debug("creating directory: " + outputDir);
@@ -99,16 +103,15 @@ public class UploadReport implements UploadReportInterface {
             try {
                 theDir.mkdir();
             } catch(SecurityException se){
-                log.error("Failed to create output directory. All requests to the service will be ignored.");
+                log.error("Failed to create output directory.");
                 throw new UploadReportException("Service misconfigured.", se);
             }
         }
-        mInitialized = true;
     }
 
     @Override
     public void uploadReport(ReportType report) throws UploadReportException {
-        if (!mInitialized) {
+        if (!initialized) {
             // Necessary because the servlet context is not accessible in ctor
             init();
         }
@@ -141,9 +144,9 @@ public class UploadReport implements UploadReportInterface {
     }
 
     /** Validate element against the dokpool meta data schema. */
-    protected void validateMeta(Element element)
+    public void validateMeta(Element element)
         throws SAXException, JAXBException {
-        if (!DOKPOOL_ELEMENT_NAME.equals(element.getTagName())) {
+        if (!(element.getTagName().endsWith(DOKPOOL_ELEMENT_NAME))) {
             log.debug("Ignoring Annotation element: " + element.getTagName());
             return;
         }
