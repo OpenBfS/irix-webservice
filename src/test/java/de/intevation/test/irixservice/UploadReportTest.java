@@ -55,6 +55,7 @@ import org.xml.sax.SAXException;
 import org.custommonkey.xmlunit.XMLTestCase;
 import org.custommonkey.xmlunit.XMLAssert;
 import org.custommonkey.xmlunit.Diff;
+import org.custommonkey.xmlunit.XMLUnit;
 
 import org.apache.commons.io.FileUtils;
 
@@ -84,6 +85,10 @@ public class UploadReportTest
     @Before
     public void setup() throws IOException {
         testObj.outputDir = tmpFolder.newFolder().getAbsolutePath();
+        XMLUnit.setIgnoreComments(true);
+        XMLUnit.setIgnoreWhitespace(true);
+        XMLUnit.setIgnoreDiffBetweenTextAndCDATA(true);
+        XMLUnit.setNormalizeWhitespace(true);
     }
 
     @After
@@ -94,7 +99,7 @@ public class UploadReportTest
         ConsoleAppender console = new ConsoleAppender(); //create appender
         String PATTERN = "[%p|%C{1}] %m%n";
         console.setLayout(new PatternLayout(PATTERN));
-        console.setThreshold(Level.ERROR);
+        console.setThreshold(Level.ERROR); // Change here for testing ;-)
         console.activateOptions();
         Logger.getRootLogger().addAppender(console);
     }
@@ -183,7 +188,12 @@ public class UploadReportTest
         }
 
         try {
-            XMLAssert.assertXMLEqual(content1, content2);
+            Diff diff = new Diff(content1, content2);
+            log.debug("Diff: " + diff.toString());
+            java.io.PrintWriter writer = new java.io.PrintWriter("/tmp/" + uuid + ".xml", "UTF-8");
+            writer.write(content2);
+            writer.close();
+            Assert.assertTrue("Output differs", diff.similar());
         } catch (IOException | SAXException e) {
             Assert.fail(e.toString());
         }
@@ -194,8 +204,6 @@ public class UploadReportTest
         testReport(VALID_REPORT);
     }
 
-    /*
-     Those are currently failing as the namespace prefixes differ.
     @Test
     public void testBild1() throws UploadReportException {
         testReport(BILD1);
@@ -205,7 +213,6 @@ public class UploadReportTest
     public void testPDF1() throws UploadReportException {
         testReport(PDF1);
     }
-    */
 
     @Test(expected=UploadReportException.class)
     public void testInvalidReport() throws UploadReportException {
