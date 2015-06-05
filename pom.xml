@@ -47,23 +47,40 @@
         <finalName>irix-webservice</finalName>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jaxb2-maven-plugin</artifactId>
-                <version>2.1</version>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>0.12.3</version>
                 <executions>
                     <execution>
-                        <id>xjc</id>
                         <goals>
-                            <goal>xjc</goal>
+                            <goal>generate</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <sources>
-                        <source>${basedir}/src/main/webapp/WEB-INF/irix-schema/IRIX.xsd</source>
-                        <source>${basedir}/src/main/webapp/WEB-INF/irix-schema/Dokpool-2.xsd</source>
-                    </sources>
+                    <schemaDirectory>${basedir}/src/main/webapp/WEB-INF/irix-schema</schemaDirectory>
+                    <schemaIncludes>
+                        <include>IRIX.xsd</include>
+                        <include>Dokpool-2.xsd</include>
+                    </schemaIncludes>
+                    <bindingDirectory>src/main/xjb</bindingDirectory>
+                    <bindingIncludes>
+                        <include>bindings.xml</include>
+                    </bindingIncludes>
+                    <args>
+                        <arg>-extension</arg>
+                        <arg>-Xnamespace-prefix</arg>
+                    </args>
+                    <verbose>false</verbose>
                 </configuration>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jvnet.jaxb2_commons</groupId>
+                        <artifactId>jaxb2-namespace-prefix</artifactId>
+                        <version>1.1</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
