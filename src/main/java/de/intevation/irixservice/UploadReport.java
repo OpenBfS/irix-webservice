@@ -114,6 +114,7 @@ public class UploadReport implements UploadReportInterface {
         if (!initialized) {
             // Necessary because the servlet context is not accessible in ctor
             init();
+            createOutputDir();
         }
         validateReport(report);
 
