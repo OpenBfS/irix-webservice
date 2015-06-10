@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime"
+    version="2.0">
+    <endpoint name="UploadReport"
+        implementation="de.intevation.irixservice.UploadReport"
+        url-pattern="/upload-report"
+        address="http://localhost:8080/irix-webservice"/>
+</endpoints>
