@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package de.bfs.IRIXdocex;
 
@@ -10,10 +10,10 @@ import org.xml.sax.SAXException;
 
 /**
  * Class for validation of an XML-file against the IRIX schema
- * 
+ *
  * @author Peter Bieringer
  * @version 0.1
- * 
+ *
  * date 2015-01-22
  *
  */
@@ -47,7 +47,7 @@ public class IRIXvalidate {
 	}
 	
 	/**
-	 * public method validate 
+	 * public method validate
 	 * @param filename
 	 * @return boolean value (valid or not valid)
 	 */
@@ -65,8 +65,8 @@ public class IRIXvalidate {
 	}
 
 	/**
-	 * main 
-	 * 
+	 * main
+	 *
 	 * @param args Filename from the command line
 	 */
 	public static void main(String[] args) {
@@ -75,9 +75,9 @@ public class IRIXvalidate {
 	         return;
 	      }
 	      System.out.println( "\nXML-document: " + args[0] + "\n" );
-	      
+	
 	      IRIXvalidate val = new IRIXvalidate(args[0]);
-	      
+	
 	      if(val.isResult())
 	    	  System.out.println("IRIX report is valid!");
 	      else

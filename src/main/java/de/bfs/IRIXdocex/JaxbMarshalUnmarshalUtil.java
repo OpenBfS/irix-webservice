@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package de.bfs.IRIXdocex;
 
@@ -40,17 +40,17 @@ public class JaxbMarshalUnmarshalUtil
    //   System.out.println(jaxbContext.toString());
       return unmarshal( jaxbContext, schema, xmlDatei, clss, validate );
    }
-   
+
 
    public static <T> T unmarshal( JAXBContext jaxbContext, Schema schema, String xmlDatei, Class<T> clss, boolean validate )
    throws JAXBException
    {
       // Unmarshaller ist nicht multithreadingsicher:
       Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-      
+
       if(validate) // Validierung gegen das XML Schema
       unmarshaller.setSchema( schema );
-      
+
       JAXBElement rep=null;
 	try {
 		rep = (JAXBElement) unmarshaller.unmarshal( new File( xmlDatei ) );
@@ -119,11 +119,11 @@ public class JaxbMarshalUnmarshalUtil
      System.out.println(annot.get(0).getTitle());
      System.out.println(annot.get(0).getText());
      }
-     
+
      List <FileEnclosureType> files= annex.getFileEnclosure();
-     
+
      String fn = files.get(0).getFileName();
-     
+
      try {
 		FileOutputStream of = new FileOutputStream(fn);
 		of.write(files.get(0).getEnclosedObject());

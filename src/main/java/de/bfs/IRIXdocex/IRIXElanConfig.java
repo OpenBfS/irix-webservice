@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * @author Peter Bieringer
  * @version 0.1 02.03.2015
- * 
+ *
  *
  */
 public class IRIXElanConfig {
@@ -27,7 +27,7 @@ public class IRIXElanConfig {
 
 	/**
 	 * At the moment constant mapping. Must be changed to database access for mapping!!!!
-	 * 
+	 *
 	 * @return
 	 */
 	private Map<String,String> initCategoryMap()
