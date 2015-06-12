@@ -43,16 +43,19 @@ import org.apache.log4j.PropertyConfigurator;
 
 import org.w3c.dom.Element;
 
-@WebService(endpointInterface = "de.intevation.irixservice.UploadReportInterface")
+@WebService(
+    endpointInterface = "de.intevation.irixservice.UploadReportInterface")
 public class UploadReport implements UploadReportInterface {
 
     private static Logger log = Logger.getLogger(UploadReport.class);
 
     /** Path to the irixSchema xsd file. */
-    private static final String IRIX_SCHEMA_LOC = "/WEB-INF/irix-schema/IRIX.xsd";
+    private static final String IRIX_SCHEMA_LOC =
+        "/WEB-INF/irix-schema/IRIX.xsd";
 
     /** Path to the Dokpool extension xsd file. */
-    private static final String DOKPOOL_SCHEMA_LOC = "/WEB-INF/irix-schema/Dokpool-2.xsd";
+    private static final String DOKPOOL_SCHEMA_LOC =
+        "/WEB-INF/irix-schema/Dokpool-2.xsd";
 
     /** The element name to identify a DokpoolMeta element. */
     private static final String DOKPOOL_ELEMENT_NAME = "DokpoolMeta";
@@ -78,7 +81,8 @@ public class UploadReport implements UploadReportInterface {
                 MessageContext.SERVLET_CONTEXT);
         } catch (IllegalStateException e) {
             System.err.println("Failed to get servlet context.");
-            throw new UploadReportException("Failed to get servlet context.", e);
+            throw new UploadReportException(
+                "Failed to get servlet context.", e);
         }
 
         String file = sc.getInitParameter("log4j-properties");
@@ -102,7 +106,7 @@ public class UploadReport implements UploadReportInterface {
 
             try {
                 theDir.mkdir();
-            } catch(SecurityException se){
+            } catch (SecurityException se) {
                 log.error("Failed to create output directory.");
                 throw new UploadReportException("Service misconfigured.", se);
             }
@@ -120,25 +124,30 @@ public class UploadReport implements UploadReportInterface {
 
         String fileName = report.getIdentification().getReportUUID() + ".xml";
         try {
-            PrintWriter writer = new PrintWriter(outputDir + "/" + fileName, "UTF-8");
-            JAXBContext jaxbContext = JAXBContext.newInstance(ReportType.class);
+            PrintWriter writer = new PrintWriter(outputDir + "/" + fileName,
+                "UTF-8");
+            JAXBContext jaxbContext = JAXBContext.newInstance(
+                ReportType.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             jaxbMarshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-            jaxbMarshaller.marshal(new ObjectFactory().createReport(report), writer);
+            jaxbMarshaller.marshal(new ObjectFactory().createReport(report),
+                writer);
 
             writer.close();
         } catch (IOException e) {
-            log.error("Failed to write report to file: '" + outputDir + "/" + fileName + "'");
-            throw new UploadReportException("Failed to write report to file: '" + outputDir +
-                    "/" + fileName + "'", e);
+            log.error("Failed to write report to file: '" + outputDir
+                + "/" + fileName + "'");
+            throw new UploadReportException("Failed to write report to file: '"
+                + outputDir + "/" + fileName + "'", e);
         } catch (JAXBException e) {
             log.error("Failed to handle requested report." + e.toString());
             throw new UploadReportException("Failed to parse the report.", e);
         }
 
         if (outputDir == null) {
-            log.debug("Ignoring request because output-dir is not writable or configured.");
+            log.debug("Ignoring request because output-dir is not writable"
+                + " or configured.");
             return;
         }
         return;
@@ -151,7 +160,8 @@ public class UploadReport implements UploadReportInterface {
             log.debug("Ignoring Annotation element: " + element.getTagName());
             return;
         }
-        SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        SchemaFactory schemaFactory = SchemaFactory.newInstance(
+            XMLConstants.W3C_XML_SCHEMA_NS_URI);
         Schema schema = schemaFactory.newSchema(dokpoolSchemaFile);
         JAXBContext jaxbContext = JAXBContext.newInstance(DokpoolMeta.class);
 
@@ -162,15 +172,19 @@ public class UploadReport implements UploadReportInterface {
     }
 
     /** Validate date a report against the IRIX Schema. */
-    protected void validateReport(ReportType report) throws UploadReportException {
+    protected void validateReport(ReportType report)
+        throws UploadReportException {
         try {
-            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            SchemaFactory schemaFactory = SchemaFactory.newInstance(
+                XMLConstants.W3C_XML_SCHEMA_NS_URI);
             Schema schema = schemaFactory.newSchema(irixSchemaFile);
-            JAXBContext jaxbContext = JAXBContext.newInstance(ReportType.class);
+            JAXBContext jaxbContext = JAXBContext.newInstance(
+                ReportType.class);
 
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setSchema(schema);
-            marshaller.marshal(new ObjectFactory().createReport(report), new DefaultHandler());
+            marshaller.marshal(new ObjectFactory().createReport(report),
+                new DefaultHandler());
             AnnexesType annex = report.getAnnexes();
             if (annex.getAnnotation() != null) {
                 for (AnnotationType anno: annex.getAnnotation()) {
@@ -187,7 +201,8 @@ public class UploadReport implements UploadReportInterface {
             }
         } catch (SAXException | JAXBException e) {
             log.debug("Validation failed: " + e);
-            throw new UploadReportException("Failed to validate report: " + e, e);
+            throw new UploadReportException("Failed to validate report: " + e,
+                e);
         }
     }
 }
