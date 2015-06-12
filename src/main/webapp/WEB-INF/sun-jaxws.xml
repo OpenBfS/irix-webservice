@@ -3,6 +3,5 @@
     version="2.0">
     <endpoint name="UploadReport"
         implementation="de.intevation.irixservice.UploadReport"
-        url-pattern="/upload-report"
-        address="http://localhost:8080/irix-webservice"/>
+        url-pattern="/upload-report"/>
 </endpoints>
