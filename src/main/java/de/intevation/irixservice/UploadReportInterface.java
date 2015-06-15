@@ -14,10 +14,20 @@ import javax.jws.soap.SOAPBinding.Style;
 
 import org.iaea._2012.irix.format.ReportType;
 
+/**
+ * {@link javax.jws.WebService} interface for uploading IRIX-XML reports.
+ */
 @WebService
 @SOAPBinding(style = Style.DOCUMENT)
 public interface UploadReportInterface {
 
+    /**
+     * {@link javax.jws.WebMethod} for uploading IRIX-XML reports to the
+     * Web Service.
+     *
+     * @param value an object representing the IRIX-XML report.
+     * @throws UploadReportException if the upload failed.
+     */
     @WebMethod
     void uploadReport(ReportType value) throws UploadReportException;
 }

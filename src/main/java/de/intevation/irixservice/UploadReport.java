@@ -43,6 +43,11 @@ import org.apache.log4j.PropertyConfigurator;
 
 import org.w3c.dom.Element;
 
+/**
+ * {@link javax.jws.WebService} interface implementation for uploading
+ * IRIX-XML reports.
+ *
+ */
 @WebService(
     endpointInterface = "de.intevation.irixservice.UploadReportInterface")
 public class UploadReport implements UploadReportInterface {
@@ -63,17 +68,27 @@ public class UploadReport implements UploadReportInterface {
     @Resource
     private WebServiceContext context;
 
+    /** Directory where reports should be stored. */
     public String outputDir;
 
+    /** The IRIX XSD-schema file. */
     public File irixSchemaFile;
+    /** The Dokpool XSD-schema file. */
     public File dokpoolSchemaFile;
 
+    /** Has {@link init()} successfully been called? */
     public boolean initialized;
 
     public UploadReport() {
         initialized = false;
     }
 
+    /**
+     * Get servlet context and initialize log4j and other parameters from
+     * configuration in web.xml.
+     *
+     * @throws UploadReportException if the servlet context cannot be obtained.
+     */
     protected void init() throws UploadReportException {
         ServletContext sc;
         try {
@@ -98,6 +113,11 @@ public class UploadReport implements UploadReportInterface {
         initialized = true;
     }
 
+    /**
+     * Create directory to store IRIX-XML reports, if not yet exists.
+     *
+     * @throws UploadReportException if the directory cannot be created.
+     */
     protected void createOutputDir() throws UploadReportException {
         File theDir = new File(outputDir);
         if (!theDir.exists()) {
@@ -113,6 +133,7 @@ public class UploadReport implements UploadReportInterface {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public void uploadReport(ReportType report) throws UploadReportException {
         if (!initialized) {
@@ -153,7 +174,16 @@ public class UploadReport implements UploadReportInterface {
         return;
     }
 
-    /** Validate element against the dokpool meta data schema. */
+    /**
+     * Validate element against the dokpool meta data schema if it has an
+     * according name.
+     *
+     * @param element the {@link org.w3c.dom.Element} to be validated.
+     * @throws org.xml.sax.SAXException if the Dokpool schema file cannot be
+     * parsed.
+     * @throws javax.xml.bind.JAXBException if an error was encountered
+     * while creating the JAXBContext.
+     */
     public void validateMeta(Element element)
         throws SAXException, JAXBException {
         if (!(element.getTagName().endsWith(DOKPOOL_ELEMENT_NAME))) {
@@ -171,7 +201,12 @@ public class UploadReport implements UploadReportInterface {
         Object dokMetaObj = u.unmarshal(element.getOwnerDocument());
     }
 
-    /** Validate date a report against the IRIX Schema. */
+    /**
+     * Validate a report against the IRIX Schema.
+     *
+     * @param report an object representing the IRIX-XML report.
+     * @throws UploadReportException if report validation failed.
+     */
     protected void validateReport(ReportType report)
         throws UploadReportException {
         try {

@@ -58,12 +58,18 @@ Maven Checkstyle plugin. Some design related checks where removed.
 
   <!-- Checks for Javadoc comments.                     -->
   <!-- See http://checkstyle.sf.net/config_javadoc.html -->
-  <!--
-  <module name="JavadocMethod"/>
   <module name="JavadocType"/>
-  <module name="JavadocVariable"/>
+  <module name="JavadocMethod">
+    <property name="scope" value="protected"/>
+    <property name="validateThrows" value="true"/>
+    <property name="allowMissingPropertyJavadoc" value="true"/>
+    <property name="tokens" value="METHOD_DEF"/>
+  </module>
+  <module name="JavadocVariable">
+    <property name="scope" value="protected"/>
+  </module>
   <module name="JavadocStyle"/>
-  -->
+
 
   <!-- Checks for Naming Conventions.                  -->
   <!-- See http://checkstyle.sf.net/config_naming.html -->

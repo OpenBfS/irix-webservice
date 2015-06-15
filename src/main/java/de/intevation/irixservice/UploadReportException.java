@@ -8,8 +8,18 @@
 
 package de.intevation.irixservice;
 
+/**
+ * Exception signaling any failure to upload an IRIX-XML report to the
+ * associated Web Service.
+ *
+ */
 public class UploadReportException extends Exception {
 
+    /**
+     * @param message the error message.
+     * @param cause the {@link java.lang.Throwable}, which is the cause of the
+     * exception.
+     */
     public UploadReportException(String message, Throwable cause) {
         super(message, cause);
     }
