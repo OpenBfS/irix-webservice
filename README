@@ -1,0 +1,18 @@
+To install the webservice simply build it with:
+
+    mvn package
+
+and install the packaged webapplication from:
+
+    target/irix-webservice.war
+
+in the Servlet Container of your choice.
+
+With the default configuration the servlet will
+be available under:
+
+    irix-webservice/upload-report\?wsdl
+
+The WSDL file can be obtained through:
+
+    irix-webservice/upload-report?wsdl
