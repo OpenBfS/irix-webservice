@@ -60,7 +60,7 @@ public class UploadReport implements UploadReportInterface {
 
     /** Path to the Dokpool extension xsd file. */
     private static final String DOKPOOL_SCHEMA_LOC =
-        "/WEB-INF/irix-schema/Dokpool-2.xsd";
+        "/WEB-INF/irix-schema/Dokpool-3.xsd";
 
     /** The element name to identify a DokpoolMeta element. */
     private static final String DOKPOOL_ELEMENT_NAME = "DokpoolMeta";

@@ -108,7 +108,7 @@ public class UploadReportTest
         setupLogging();
         testObj = new UploadReport();
         testObj.irixSchemaFile = new File("src/main/webapp/WEB-INF/irix-schema/IRIX.xsd");
-        testObj.dokpoolSchemaFile = new File("src/main/webapp/WEB-INF/irix-schema/Dokpool-2.xsd");
+        testObj.dokpoolSchemaFile = new File("src/main/webapp/WEB-INF/irix-schema/Dokpool-3.xsd");
         testObj.initialized = true;
     }
 
