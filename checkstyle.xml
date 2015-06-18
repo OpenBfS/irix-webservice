@@ -157,7 +157,6 @@ Maven Checkstyle plugin. Some design related checks where removed.
 
   <!-- Checks for class design                         -->
   <!-- See http://checkstyle.sf.net/config_design.html -->
-  <module name="FinalClass"/>
   <module name="HideUtilityClassConstructor"/>
   <module name="InterfaceIsType"/>
 
