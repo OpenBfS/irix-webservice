@@ -11,7 +11,7 @@ in the Servlet Container of your choice.
 With the default configuration the servlet will
 be available under:
 
-    irix-webservice/upload-report\?wsdl
+    irix-webservice/upload-report
 
 The WSDL file can be obtained through:
 
