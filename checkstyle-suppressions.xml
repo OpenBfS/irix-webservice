@@ -7,4 +7,6 @@
             files="de/bfs"/>
   <suppress checks=".*"
             files="generated-sources"/>
+  <suppress checks="Javadoc.*"
+            files="src/test"/>
 </suppressions>
