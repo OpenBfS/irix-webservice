@@ -4,7 +4,4 @@
     <endpoint name="UploadReport"
         implementation="de.intevation.irixservice.UploadReport"
         url-pattern="/upload-report"/>
-    <endpoint name="IrixBroker"
-              implementation="de.bfs.irixbroker.IrixBroker"
-              url-pattern="/irix-broker"/>
 </endpoints>

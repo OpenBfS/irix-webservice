@@ -12,21 +12,10 @@
          <load-on-startup>1</load-on-startup>
      </servlet>
 
-    <servlet>
-        <servlet-name>IrixBroker</servlet-name>
-        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
      <servlet-mapping>
          <servlet-name>ReportUpload</servlet-name>
          <url-pattern>/upload-report</url-pattern>
      </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>IrixBroker</servlet-name>
-        <url-pattern>/irix-broker</url-pattern>
-    </servlet-mapping>
 
      <context-param>
          <param-name>log4j-properties</param-name>
@@ -40,7 +29,7 @@
      </context-param>
 
     <context-param>
-        <param-name>irixbroker-dokpool-properties</param-name>
+        <param-name>irixbroker-properties</param-name>
         <param-value>/WEB-INF/irixbroker-dokpool.properties</param-value>
     </context-param>
 
