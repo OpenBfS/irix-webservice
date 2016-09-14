@@ -6,7 +6,18 @@
     <packaging>war</packaging>
     <version>1.3-SNAPSHOT</version>
     <name>Service to store IRIX Reports</name>
-    <url>http://maven.apache.org</url>
+    <organization>
+        <name>German Federal Office for Radiation Protection</name>
+        <url>http://www.bfs.de</url>
+    </organization>
+    <inceptionYear>2016</inceptionYear>
+    <licenses>
+        <license>
+            <name>General Public License (GPL)</name>
+            <url>http://www.gnu.org/copyleft/gpl.txt</url>
+        </license>
+    </licenses>
+    <url>http://www.bfs.de</url>
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -43,14 +54,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>de.bfs.irixbroker</groupId>
+            <groupId>de.bfs</groupId>
             <artifactId>bfs-irixbroker</artifactId>
-            <version>1.3</version>
-        </dependency>
-        <dependency>
-            <groupId>de.bfs.elan.client</groupId>
-            <artifactId>elan-client</artifactId>
-            <version>1.0</version>
+            <version>1.3-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <build>
