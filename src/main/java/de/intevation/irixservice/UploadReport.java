@@ -17,6 +17,7 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.XMLConstants;
 
+import de.bfs.irixbroker.IrixBrokerException;
 import org.iaea._2012.irix.format.ReportType;
 import org.iaea._2012.irix.format.ObjectFactory;
 import org.iaea._2012.irix.format.annexes.AnnexesType;
@@ -42,6 +43,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 import org.w3c.dom.Element;
+import de.bfs.irixbroker.IrixBroker;
 
 /**
  * {@link javax.jws.WebService} interface implementation for uploading
@@ -171,6 +173,14 @@ public class UploadReport implements UploadReportInterface {
                 + " or configured.");
             return;
         }
+
+        try {
+            IrixBroker dib = new de.bfs.irixbroker.IrixBroker();
+            dib.deliverIrixBroker(report);
+        } catch (IrixBrokerException e) {
+            throw new UploadReportException("IrixBrokerException: " + e, e);
+        }
+
         return;
     }
 

@@ -42,6 +42,11 @@
             <version>2.4</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>de.bfs.elan.client</groupId>
+            <artifactId>elan-client</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>irix-webservice</finalName>
