@@ -22,15 +22,17 @@ import org.iaea._2012.irix.format.ObjectFactory;
 import org.iaea._2012.irix.format.annexes.AnnexesType;
 import org.iaea._2012.irix.format.annexes.AnnotationType;
 
-import de.bfs.irixbroker.IrixBroker;
 import de.bfs.irix.extensions.dokpool.DokpoolMeta;
+import de.bfs.irixbroker.IrixBroker;
 
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.SAXException;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.File;
+import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.PrintWriter;
+import java.util.Properties;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -72,6 +74,9 @@ public class UploadReport implements UploadReportInterface {
     /** Directory where reports should be stored. */
     public String outputDir;
 
+    /** Properties for BfS IrixBroker. */
+    public Properties bfsIrixBrokerProperties;
+
     /** The IRIX XSD-schema file. */
     public File irixSchemaFile;
     /** The Dokpool XSD-schema file. */
@@ -105,11 +110,29 @@ public class UploadReport implements UploadReportInterface {
         String log4jProperties = sc.getRealPath(file);
         PropertyConfigurator.configure(log4jProperties);
 
+        // TODO make configurable - no filesaving if storage-dir is not set
         outputDir = sc.getInitParameter("storage-dir");
         log.debug("Using: " + outputDir + " as Storage location.");
 
         irixSchemaFile = new File(sc.getRealPath(IRIX_SCHEMA_LOC));
         dokpoolSchemaFile = new File(sc.getRealPath(DOKPOOL_SCHEMA_LOC));
+
+        try {
+            file = sc.getInitParameter("irixbroker-properties");
+            String bfsIrixBrokerPropertiesFile = sc.getRealPath(file);
+            bfsIrixBrokerProperties = new Properties();
+
+            try {
+                FileInputStream stream =
+                        new FileInputStream(bfsIrixBrokerPropertiesFile);
+                bfsIrixBrokerProperties.load(stream);
+                stream.close();
+            } catch (IOException ioe) {
+                return;
+            }
+        } catch (Exception e) {
+            log.debug(e.toString());
+        }
 
         initialized = true;
     }
@@ -174,14 +197,35 @@ public class UploadReport implements UploadReportInterface {
         }
 
         try {
-            IrixBroker dib = new de.bfs.irixbroker.IrixBroker();
-            //dib.deliverIrixBroker(report);
+            deliverReport(report);
+        } catch (UploadReportException e) {
+            log.error("Failed to deliver report: " + e.toString());
+        }
+
+        return;
+    }
+
+    /** {@inheritDoc} */
+    public void deliverReport(ReportType report)
+            throws UploadReportException {
+        if (!initialized) {
+            // Necessary because the servlet context is not accessible in ctor
+            init();
+        }
+
+
+
+        try {
+            IrixBroker dib = new de.bfs.irixbroker
+                    .IrixBroker(bfsIrixBrokerProperties);
+            dib.deliverIrixBroker(report);
         } catch (Exception e) {
             throw new UploadReportException("IrixBrokerException: " + e, e);
         }
 
         return;
     }
+
 
     /**
      * Validate element against the dokpool meta data schema if it has an
