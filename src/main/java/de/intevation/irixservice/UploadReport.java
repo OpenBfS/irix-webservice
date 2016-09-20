@@ -168,32 +168,34 @@ public class UploadReport implements UploadReportInterface {
         validateReport(report);
 
         String fileName = report.getIdentification().getReportUUID() + ".xml";
-        try {
-            PrintWriter writer = new PrintWriter(outputDir + "/" + fileName,
-                "UTF-8");
-            JAXBContext jaxbContext = JAXBContext.newInstance(
-                ReportType.class);
-            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            jaxbMarshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-            jaxbMarshaller.marshal(new ObjectFactory().createReport(report),
-                writer);
+        if (outputDir.length() > 0) {
+            try {
+               PrintWriter writer = new PrintWriter(outputDir + "/" + fileName,
+                    "UTF-8");
+                JAXBContext jaxbContext = JAXBContext.newInstance(
+                    ReportType.class);
+                Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+                jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,
+                    true);
+                jaxbMarshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+                jaxbMarshaller.marshal(new ObjectFactory().createReport(report),
+                    writer);
 
-            writer.close();
-        } catch (IOException e) {
-            log.error("Failed to write report to file: '" + outputDir
-                + "/" + fileName + "'");
-            throw new UploadReportException("Failed to write report to file: '"
-                + outputDir + "/" + fileName + "'", e);
-        } catch (JAXBException e) {
-            log.error("Failed to handle requested report." + e.toString());
-            throw new UploadReportException("Failed to parse the report.", e);
-        }
-
-        if (outputDir == null) {
+                writer.close();
+           } catch (IOException e) {
+                log.error("Failed to write report to file: '" + outputDir
+                    + "/" + fileName + "'");
+                throw new UploadReportException(
+                    "Failed to write report to file: '"
+                    + outputDir + "/" + fileName + "'", e);
+            } catch (JAXBException e) {
+                log.error("Failed to handle requested report." + e.toString());
+                throw new UploadReportException("Failed to parse the report.",
+                    e);
+            }
+        } else {
             log.debug("Ignoring request because output-dir is not writable"
-                + " or configured.");
-            return;
+                + " or not configured.");
         }
 
         try {

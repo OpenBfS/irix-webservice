@@ -30,7 +30,9 @@
 
     <context-param>
         <param-name>irixbroker-properties</param-name>
-        <param-value>/WEB-INF/bfs-irixbroker.properties</param-value>
+        <param-value>
+            /WEB-INF/bfs-irixbroker.properties
+        </param-value>
     </context-param>
 
      <listener>
