@@ -1,6 +1,6 @@
 To install the webservice simply build it with:
 
-    mvn package
+    mvn clean package
 
 and install the packaged webapplication from:
 
