@@ -1,9 +1,24 @@
-language: java
-jdk:
-  - oraclejdk8
-  - oraclejdk7
-  - openjdk7
+sudo: true
+dist: trusty
 cache:
   directories:
-  - $HOME/.m2
+    - "$HOME/.m2"
+language: java
+before_install:
+  - rm ~/.m2/settings.xml
+  - pwd
+  - cd .. && git clone https://github.com/OpenBfS/dokpool-javaclient.git && cd dokpool-javaclient && mvn clean compile package install
+  - cd .. && git clone https://github.com/OpenBfS/irix-broker.git && cd irix-broker && mvn clean compile package install
+  - cd ../irix-webservice
+script:
+  - mvn clean compile package install
+notifications:
+  email:
+    on_success: never
+    on_failure: never
+jdk:
+- oraclejdk7
+- openjdk7
+- oraclejdk8
+- openjdk8
 
