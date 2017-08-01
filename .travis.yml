@@ -7,10 +7,14 @@ language: java
 before_install:
   - rm ~/.m2/settings.xml
   - pwd
-  - cd .. && ls && git clone https://github.com/OpenBfS/dokpool-javaclient.git && git clone https://github.com/OpenBfS/irix-broker.git && ls
-  - ls && cd dokpool-javaclient && ls && mvn compile package install && cd .. && ls
-  - ls && cd irix-broker && ls && mvn compile package install && cd .. && ls
-  - ls && cd ../irix-webservice
+  - cd .. && ls
+  - git clone https://github.com/OpenBfS/dokpool-javaclient.git
+  - git clone https://github.com/OpenBfS/irix-broker.git
+  - cd dokpool-javaclient
+  - mvn compile package install
+  - cd ../irix-broker
+  - mvn compile package install
+  - cd ../irix-webservice
 script:
   - mvn clean compile package install
 notifications:
