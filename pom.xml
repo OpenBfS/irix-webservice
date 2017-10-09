@@ -56,7 +56,7 @@
         <dependency>
             <groupId>de.bfs</groupId>
             <artifactId>bfs-irixbroker</artifactId>
-            <version>1.4.0</version>
+            <version>1.5-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <build>
