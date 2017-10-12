@@ -27,6 +27,9 @@
                 <IsDoksys>false</IsDoksys>
                 <IsRodos>false</IsRodos>
                 <IsRei>false</IsRei>
+                <ElanScenarios>
+                    <ElanScenario>routinemode</ElanScenario>
+                </ElanScenarios>
                 <NetworkOperator>U - BFS (ABI)</NetworkOperator>
                 <SampleTypeId>L5</SampleTypeId>
                 <SampleType>L5 - Niederschlag</SampleType>
