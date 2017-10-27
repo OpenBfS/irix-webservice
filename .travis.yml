@@ -10,8 +10,8 @@ before_install:
   - rm ~/.m2/settings.xml
   - pwd
   - cd .. && ls
-  - git clone --recursive https://github.com/OpenBfS/dokpool-javaclient.git
-  - git clone --recursive https://github.com/OpenBfS/irix-broker.git
+  - git clone --branch master --recursive https://github.com/OpenBfS/dokpool-javaclient.git
+  - git clone --branch master --recursive https://github.com/OpenBfS/irix-broker.git
   - cd dokpool-javaclient
   - mvn compile package install
   - cd ../irix-broker
