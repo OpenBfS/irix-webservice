@@ -16,3 +16,15 @@ be available under:
 The WSDL file can be obtained through:
 
     irix-webservice/upload-report?wsdl
+
+Test Service via curl
+
+    Find example IRIX-xml docs in ./examples
+
+    curl -X POST -H "Content-Type: text/xml; charset=utf-8" \
+        -H 'SOAPAction:"http://irixservice.intevation.de/UploadReportInterface/uploadReportRequest"' \
+        -d @img_uploadReport.xml http://localhost/irix-webservice/upload-report
+
+    Because dokpool-client refuses to upload a Report having a UUID already imported, the
+    <id:ReportUUID>....</id:ReportUUID> has to be edited in the Report, if already succesfully imported.
+
