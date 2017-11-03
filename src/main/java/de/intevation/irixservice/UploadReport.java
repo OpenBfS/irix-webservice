@@ -276,7 +276,7 @@ public class UploadReport implements UploadReportInterface {
             marshaller.marshal(new ObjectFactory().createReport(report),
                 new DefaultHandler());
             AnnexesType annex = report.getAnnexes();
-            if (annex.getAnnotation() != null) {
+            if (annex != null && annex.getAnnotation() != null) {
                 for (AnnotationType anno: annex.getAnnotation()) {
                     if (anno.getAny() == null) {
                         continue;
