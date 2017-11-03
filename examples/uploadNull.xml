@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Body>
+        <irixws:uploadReport xmlns:irixws="http://irixservice.intevation.de/"
+                             xmlns:w3c="http://www.w3.org/2000/09/xmldsig#" version="1.0"
+                             xmlns:id="http://www.iaea.org/2012/IRIX/Format/Identification"
+                             xmlns:base="http://www.iaea.org/2012/IRIX/Format/Base"
+                             xmlns:resp="http://www.iaea.org/2012/IRIX/Format/ResponseActions"
+                             xmlns:req="http://www.iaea.org/2012/IRIX/Format/Requests"
+                             xmlns:meteo="http://www.iaea.org/2012/IRIX/Format/Meteorology"
+                             xmlns:medical="http://www.iaea.org/2012/IRIX/Format/MedicalInformation"
+                             xmlns:irix="http://www.iaea.org/2012/IRIX/Format"
+                             xmlns:cons="http://www.iaea.org/2012/IRIX/Format/ConsequenceInformation"
+                             xmlns:annex="http://www.iaea.org/2012/IRIX/Format/Annexes"
+                             xmlns:media="http://www.iaea.org/2012/IRIX/Format/MediaInformation"
+                             xmlns:release="http://www.iaea.org/2012/IRIX/Format/ReleaseInformation"
+                             xmlns:loc="http://www.iaea.org/2012/IRIX/Format/Locations"
+                             xmlns:event="http://www.iaea.org/2012/IRIX/Format/EventInformation"
+                             xmlns:meas="http://www.iaea.org/2012/IRIX/Format/Measurements">
+            <arg0 version="1.0"></arg0>
+        </irixws:uploadReport>
+    </soapenv:Body>
+</soapenv:Envelope>

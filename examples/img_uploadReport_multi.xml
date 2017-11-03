@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Body>
+        <irixws:uploadReport xmlns:irixws="http://irixservice.intevation.de/"
+                             xmlns:w3c="http://www.w3.org/2000/09/xmldsig#" version="1.0"
+                             xmlns:id="http://www.iaea.org/2012/IRIX/Format/Identification"
+                             xmlns:base="http://www.iaea.org/2012/IRIX/Format/Base"
+                             xmlns:resp="http://www.iaea.org/2012/IRIX/Format/ResponseActions"
+                             xmlns:req="http://www.iaea.org/2012/IRIX/Format/Requests"
+                             xmlns:meteo="http://www.iaea.org/2012/IRIX/Format/Meteorology"
+                             xmlns:medical="http://www.iaea.org/2012/IRIX/Format/MedicalInformation"
+                             xmlns:irix="http://www.iaea.org/2012/IRIX/Format"
+                             xmlns:cons="http://www.iaea.org/2012/IRIX/Format/ConsequenceInformation"
+                             xmlns:annex="http://www.iaea.org/2012/IRIX/Format/Annexes"
+                             xmlns:media="http://www.iaea.org/2012/IRIX/Format/MediaInformation"
+                             xmlns:release="http://www.iaea.org/2012/IRIX/Format/ReleaseInformation"
+                             xmlns:loc="http://www.iaea.org/2012/IRIX/Format/Locations"
+                             xmlns:event="http://www.iaea.org/2012/IRIX/Format/EventInformation"
+                             xmlns:meas="http://www.iaea.org/2012/IRIX/Format/Measurements">
+            <arg0 version="1.0">
+                <id:Identification>
+                    <id:OrganisationReporting>irix.test.de</id:OrganisationReporting>
+                    <id:DateAndTimeOfCreation>2017-11-03T13:15:48Z</id:DateAndTimeOfCreation>
+                    <id:ReportContext>Test</id:ReportContext>
+                    <id:SequenceNumber>1</id:SequenceNumber>
+                    <id:ReportUUID>2925387a-aa9e-456e-9a36-ca6336de7392</id:ReportUUID>
+                    <id:Confidentiality>Free for Public Use</id:Confidentiality>
+                    <id:ReportingBases>
+                        <id:ReportingBasis>ESD</id:ReportingBasis>
+                    </id:ReportingBases>
+                    <id:Identifications>
+                        <base:PersonContactInfo>
+                            <base:Name>Testuser</base:Name>
+                        </base:PersonContactInfo>
+                        <base:OrganisationContactInfo>
+                            <base:Name>TestOrg</base:Name>
+                            <base:OrganisationID>irix.test.de</base:OrganisationID>
+                            <base:Country>DE</base:Country>
+                        </base:OrganisationContactInfo>
+                    </id:Identifications>
+                </id:Identification>
+                <annex:Annexes>
+                    <annex:Annotation>
+                        <annex:Title>1st IRIX multi CURL Test Request</annex:Title>
+                        <DokpoolMeta xmlns="http://www.bfs.de/IRIX/Extensions/Dokpool">
+                            <Purpose>Standard-Info</Purpose>
+                            <DokpoolContentType>gammadoserate</DokpoolContentType>
+                            <DokpoolName>bund</DokpoolName>
+                            <DokpoolGroupFolder>bund_auto-messungen/automatisch-intern</DokpoolGroupFolder>
+                            <DokpoolPrivateFolder>rb-fr</DokpoolPrivateFolder>
+                            <DokpoolTransferFolder/>
+                            <IsElan>true</IsElan>
+                            <IsDoksys>false</IsDoksys>
+                            <IsRodos>false</IsRodos>
+                            <IsRei>false</IsRei>
+                            <ElanScenarios>
+                                <ElanScenario>routinemode</ElanScenario>
+                            </ElanScenarios>
+                            <NetworkOperator>U - BFS (ABI)</NetworkOperator>
+                            <SampleTypeId>L5</SampleTypeId>
+                            <SampleType>L5 - Niederschlag</SampleType>
+                            <Dom>Gamma-Spektrometrie</Dom>
+                            <DataType>LaDa</DataType>
+                            <LegalBase>Europa</LegalBase>
+                            <MeasuringProgram>Intensivmessprogramm</MeasuringProgram>
+                            <Status>3 - nicht plausibel</Status>
+                            <SamplingBegin>2015-05-28T13:35:54Z</SamplingBegin>
+                            <SamplingEnd>2015-05-28T13:52:52Z</SamplingEnd>
+                        </DokpoolMeta>
+                        <annex:Text>uploaded by the Dschörman/German Federal Office for Radiation (☢) Protection.
+                        </annex:Text>
+                    </annex:Annotation>
+                </annex:Annexes>
+            </arg0>
+            <arg1 version="1.0">
+                <id:Identification>
+                    <id:OrganisationReporting>irix.test.de</id:OrganisationReporting>
+                    <id:DateAndTimeOfCreation>2017-11-03T13:15:48Z</id:DateAndTimeOfCreation>
+                    <id:ReportContext>Test</id:ReportContext>
+                    <id:SequenceNumber>2</id:SequenceNumber>
+                    <id:ReportUUID>2925387a-aa9e-456e-9a36-ca6336de7393</id:ReportUUID>
+                    <id:Confidentiality>Free for Public Use</id:Confidentiality>
+                    <id:ReportingBases>
+                        <id:ReportingBasis>ESD</id:ReportingBasis>
+                    </id:ReportingBases>
+                    <id:Identifications>
+                        <base:PersonContactInfo>
+                            <base:Name>Testuser</base:Name>
+                        </base:PersonContactInfo>
+                        <base:OrganisationContactInfo>
+                            <base:Name>TestOrg</base:Name>
+                            <base:OrganisationID>irix.test.de</base:OrganisationID>
+                            <base:Country>DE</base:Country>
+                        </base:OrganisationContactInfo>
+                    </id:Identifications>
+                </id:Identification>
+                <annex:Annexes>
+                    <annex:Annotation>
+                        <annex:Title>2nd IRIX multi CURL Test Request</annex:Title>
+                        <DokpoolMeta xmlns="http://www.bfs.de/IRIX/Extensions/Dokpool">
+                            <Purpose>Standard-Info</Purpose>
+                            <DokpoolContentType>gammadoserate</DokpoolContentType>
+                            <DokpoolName>bund</DokpoolName>
+                            <DokpoolGroupFolder>bund_auto-messungen/automatisch-intern</DokpoolGroupFolder>
+                            <DokpoolPrivateFolder>rb-fr</DokpoolPrivateFolder>
+                            <DokpoolTransferFolder/>
+                            <IsElan>true</IsElan>
+                            <IsDoksys>false</IsDoksys>
+                            <IsRodos>false</IsRodos>
+                            <IsRei>false</IsRei>
+                            <ElanScenarios>
+                                <ElanScenario>routinemode</ElanScenario>
+                            </ElanScenarios>
+                            <NetworkOperator>U - BFS (ABI)</NetworkOperator>
+                            <SampleTypeId>L5</SampleTypeId>
+                            <SampleType>L5 - Niederschlag</SampleType>
+                            <Dom>Gamma-Spektrometrie</Dom>
+                            <DataType>LaDa</DataType>
+                            <LegalBase>Europa</LegalBase>
+                            <MeasuringProgram>Intensivmessprogramm</MeasuringProgram>
+                            <Status>3 - nicht plausibel</Status>
+                            <SamplingBegin>2015-05-28T13:35:54Z</SamplingBegin>
+                            <SamplingEnd>2015-05-28T13:52:52Z</SamplingEnd>
+                        </DokpoolMeta>
+                        <annex:Text>uploaded by the Dschörman/German Federal Office for Radiation (☢) Protection.
+                        </annex:Text>
+                    </annex:Annotation>
+                </annex:Annexes>
+            </arg1>
+        </irixws:uploadReport>
+    </soapenv:Body>
+</soapenv:Envelope>
