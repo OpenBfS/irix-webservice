@@ -28,3 +28,7 @@ Test Service via curl
     Because dokpool-client refuses to upload a Report having a UUID already imported, the
     <id:ReportUUID>....</id:ReportUUID> has to be edited in the Report, if already succesfully imported.
 
+    To transform irix:Report xml-Files (e.g. as produced as output by irix-client) you can use xsltproc and the 
+    irixReport2irixwsUploadReport.xslt in ./examples Folder. Use it like this:
+
+    xsltproc -o irixwsReportUpload.xml irixReport2irixwsUploadReport.xslt irixReport.xml 
