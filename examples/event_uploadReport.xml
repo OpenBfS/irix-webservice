@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<irix:Report xmlns:w3c="http://www.w3.org/2000/09/xmldsig#" version="1.0"
+                     xmlns:id="http://www.iaea.org/2012/IRIX/Format/Identification"
+                     xmlns:irix="http://www.iaea.org/2012/IRIX/Format"
+                     xmlns:base="http://www.iaea.org/2012/IRIX/Format/Base"
+                     xmlns:loc="http://www.iaea.org/2012/IRIX/Format/Locations"
+                     xmlns:event="http://www.iaea.org/2012/IRIX/Format/EventInformation">
+        <id:Identification>
+            <id:OrganisationReporting>irix.test.de</id:OrganisationReporting>
+            <id:DateAndTimeOfCreation>2017-11-03T13:15:48Z</id:DateAndTimeOfCreation>
+            <id:ReportContext>Test</id:ReportContext>
+            <id:SequenceNumber>42</id:SequenceNumber>
+            <id:ReportUUID>2925387a-aa9e-456e-9a36-ca6336de7391</id:ReportUUID>
+            <id:Confidentiality>Free for Public Use</id:Confidentiality>
+            <id:ReportingBases>
+                <id:ReportingBasis>EU Council Decision 87/600/EURATOM</id:ReportingBasis>
+                <id:ReportingBasis>Convention on Early Notification of a Nuclear Accident, Article 2
+                </id:ReportingBasis>
+                <id:ReportingBasis>ESD</id:ReportingBasis>
+            </id:ReportingBases>
+            <id:Identifications>
+                <base:PersonContactInfo>
+                    <base:Name>Testuser</base:Name>
+                </base:PersonContactInfo>
+                <base:OrganisationContactInfo>
+                    <base:Name>TestOrg</base:Name>
+                    <base:OrganisationID>irix.test.de</base:OrganisationID>
+                    <base:Country>DE</base:Country>
+                </base:OrganisationContactInfo>
+            </id:Identifications>
+        </id:Identification>
+        <event:EventInformation ValidAt="2017-08-22T22:00:04Z">
+            <event:TypeOfEvent>Transport Event</event:TypeOfEvent>
+            <!-- "Nuclear Installation Event", "Missing Dangerous Source", "Discovered Dangerous Source",
+            "Space Object Re-entry", "Elevated Ambient Radiation Levels", "Contamination in Food / Drinking Water",
+            "Contamination in Commodities", "Severe Overexposure", "Transport Event", "Credible Threat",
+            "Malicious Act", "Other" -->
+            <event:TypeOfEventDescription>transport event next to sim city</event:TypeOfEventDescription>
+            <event:DateAndTimeOfEvent>2017-08-22T22:00:04Z</event:DateAndTimeOfEvent>
+            <loc:Location>
+                <loc:Name>Freiburg</loc:Name>
+            </loc:Location>
+            <event:EventDescription>an accident occured while a nuclear fuel transporter has been hit by a truck</event:EventDescription>
+        </event:EventInformation>
+</irix:Report>
