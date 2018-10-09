@@ -306,7 +306,8 @@ public class UploadReport implements UploadReportInterface {
             log.debug("Moving File to outputSaveDir.");
             try {
                 Path outputPath = Paths.get(outputDir + "/" + fileName);
-                Path outputSavePath = Paths.get(outputDir + "/" + outputSaveDir + "/" + fileName);
+                Path outputSavePath = Paths.get(outputDir + "/"
+                        + outputSaveDir + "/" + fileName);
                 Files.move(outputPath, outputSavePath);
             } catch (IOException i) {
                 log.error("Failed to move File to outputSaveDir: "
@@ -317,8 +318,8 @@ public class UploadReport implements UploadReportInterface {
             log.error("Moving File to outputErrorDir.");
             try {
                 Path outputPath = Paths.get(outputDir + "/" + fileName);
-                Path outputErrorPath = Paths.get(outputDir + "/" + outputErrorDir + "/"
-                        + fileName);
+                Path outputErrorPath = Paths.get(outputDir + "/"
+                        + outputErrorDir + "/" + fileName);
                 Files.move(outputPath, outputErrorPath);
             } catch (IOException i) {
                 log.error("Failed to move File to outputErrorDir: "
