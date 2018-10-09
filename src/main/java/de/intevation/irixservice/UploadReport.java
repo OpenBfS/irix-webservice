@@ -32,6 +32,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.FileInputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.Properties;
 
 import javax.xml.bind.JAXBContext;
@@ -49,40 +52,67 @@ import org.w3c.dom.Element;
 /**
  * {@link javax.jws.WebService} interface implementation for uploading
  * IRIX-XML reports.
- *
  */
 @WebService(
-    endpointInterface = "de.intevation.irixservice.UploadReportInterface")
+        endpointInterface = "de.intevation.irixservice.UploadReportInterface")
 public class UploadReport implements UploadReportInterface {
 
     private static Logger log = Logger.getLogger(UploadReport.class);
 
-    /** Path to the irixSchema xsd file. */
+    /**
+     * Path to the irixSchema xsd file.
+     */
     private static final String IRIX_SCHEMA_LOC =
-        "/WEB-INF/irix-schema/IRIX.xsd";
+            "/WEB-INF/irix-schema/IRIX.xsd";
 
-    /** Path to the Dokpool extension xsd file. */
+    /**
+     * Path to the Dokpool extension xsd file.
+     */
     private static final String DOKPOOL_SCHEMA_LOC =
-        "/WEB-INF/irix-schema/Dokpool-3.xsd";
+            "/WEB-INF/irix-schema/Dokpool-3.xsd";
 
-    /** The element name to identify a DokpoolMeta element. */
+    /**
+     * The element name to identify a DokpoolMeta element.
+     */
     private static final String DOKPOOL_ELEMENT_NAME = "DokpoolMeta";
 
     @Resource
     private WebServiceContext context;
 
-    /** Directory where reports should be stored. */
+    /**
+     * Directory where reports should be stored.
+     */
     public String outputDir;
 
-    /** Properties for BfS IrixBroker. */
+    /**
+     * SubDirectory where reports
+     * with deliveryError should be stored.
+     */
+    private static String outputErrorDir = "error";
+
+    /**
+     * SubDirectory where reports
+     * that have been successfully delivered should be stored.
+     */
+    private static String outputSaveDir = "save";
+
+    /**
+     * Properties for BfS IrixBroker.
+     */
     public Properties bfsIrixBrokerProperties;
 
-    /** The IRIX XSD-schema file. */
+    /**
+     * The IRIX XSD-schema file.
+     */
     public File irixSchemaFile;
-    /** The Dokpool XSD-schema file. */
+    /**
+     * The Dokpool XSD-schema file.
+     */
     public File dokpoolSchemaFile;
 
-    /** Has {@link init()} successfully been called? */
+    /**
+     * Has {@link this.init()} successfully been called?
+     */
     public boolean initialized;
 
     public UploadReport() {
@@ -99,11 +129,11 @@ public class UploadReport implements UploadReportInterface {
         ServletContext sc;
         try {
             sc = (ServletContext) context.getMessageContext().get(
-                MessageContext.SERVLET_CONTEXT);
+                    MessageContext.SERVLET_CONTEXT);
         } catch (IllegalStateException e) {
             System.err.println("Failed to get servlet context.");
             throw new UploadReportException(
-                "Failed to get servlet context.", e);
+                    "Failed to get servlet context.", e);
         }
 
         String file = sc.getInitParameter("log4j-properties");
@@ -145,76 +175,169 @@ public class UploadReport implements UploadReportInterface {
     protected void createOutputDir() throws UploadReportException {
         File theDir = new File(outputDir);
         if (!theDir.exists()) {
-            log.debug("creating directory: " + outputDir);
-            boolean result = false;
-
+            log.debug("creating directory: " + theDir.getAbsolutePath());
             try {
                 theDir.mkdir();
+                log.debug("Created directory: " + theDir.getAbsolutePath());
             } catch (SecurityException se) {
                 log.error("Failed to create output directory.");
                 throw new UploadReportException("Service misconfigured.", se);
             }
+        } else {
+            log.debug("output directory already exists: "
+                    + theDir.getAbsolutePath());
         }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * Create directory to store IRIX-XML reports
+     * with delivery errors, if not yet exists.
+     *
+     * @throws UploadReportException if the directory cannot be created.
+     */
+    protected void createOutputErrorDir() throws UploadReportException {
+        File theDir = new File(outputDir);
+        File theErrorDir = new File(outputDir
+                + "/" + outputErrorDir);
+        if (theDir.exists()) {
+            if (!theErrorDir.exists()) {
+                log.debug("creating directory: "
+                        + theErrorDir.getAbsolutePath());
+                try {
+                    theErrorDir.mkdir();
+                    log.debug("Created directory: "
+                            + theErrorDir.getAbsolutePath());
+                } catch (SecurityException se) {
+                    log.error("Failed to create outputError directory.");
+                    throw new UploadReportException("Service misconfigured."
+                            , se);
+                }
+            } else {
+                log.debug("errorOutput directory already exists: "
+                        + theErrorDir.getAbsolutePath());
+            }
+        } else {
+            log.warn("output directory does not exists: "
+                    + theDir.getAbsolutePath());
+        }
+    }
+
+    /**
+     * Create directory to store IRIX-XML reports
+     * that have been successfully been delivered, if not yet exists.
+     *
+     * @throws UploadReportException if the directory cannot be created.
+     */
+
+    protected void createOutputSaveDir() throws UploadReportException {
+        File theDir = new File(outputDir);
+        File theSaveDir = new File(outputDir + "/" + outputSaveDir);
+        if (theDir.exists()) {
+            if (!theSaveDir.exists()) {
+                log.debug("creating directory: "
+                        + theSaveDir.getAbsolutePath());
+                try {
+                    theSaveDir.mkdir();
+                    log.debug("Created directory: "
+                            + theSaveDir.getAbsolutePath());
+                } catch (SecurityException se) {
+                    log.error("Failed to create outputError directory.");
+                    throw new UploadReportException("Service misconfigured."
+                            , se);
+                }
+            } else {
+                log.debug("saveOutput directory already exists: "
+                        + theSaveDir.getAbsolutePath());
+            }
+        } else {
+            log.warn("output directory does not exists: "
+                    + theDir.getAbsolutePath());
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void uploadReport(ReportType report) throws UploadReportException {
         if (!initialized) {
             // Necessary because the servlet context is not accessible in ctor
             init();
             createOutputDir();
+            createOutputErrorDir();
+            createOutputSaveDir();
         }
         validateReport(report);
 
         String fileName = report.getIdentification().getReportUUID() + ".xml";
         if (outputDir.length() > 0) {
             try {
-               PrintWriter writer = new PrintWriter(outputDir + "/" + fileName,
-                    "UTF-8");
+                PrintWriter writer = new PrintWriter(outputDir + "/" + fileName,
+                        "UTF-8");
                 JAXBContext jaxbContext = JAXBContext.newInstance(
-                    ReportType.class);
+                        ReportType.class);
                 Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
                 jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,
-                    true);
+                        true);
                 jaxbMarshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
                 jaxbMarshaller.marshal(new ObjectFactory().createReport(report),
-                    writer);
+                        writer);
 
                 writer.close();
-           } catch (IOException e) {
+            } catch (IOException e) {
                 log.error("Failed to write report to file: '" + outputDir
-                    + "/" + fileName + "'");
+                        + "/" + fileName + "'");
                 throw new UploadReportException(
-                    "Failed to write report to file: '"
-                    + outputDir + "/" + fileName + "'", e);
+                        "Failed to write report to file: '"
+                                + outputDir + "/" + fileName + "'", e);
             } catch (JAXBException e) {
                 log.error("Failed to handle requested report." + e.toString());
                 throw new UploadReportException("Failed to parse the report.",
-                    e);
+                        e);
             }
         } else {
             log.debug("Ignoring request because output-dir is not writable"
-                + " or not configured.");
+                    + " or not configured.");
         }
 
         try {
             deliverReport(report);
+            log.debug("Successfully delivered report.");
+            log.debug("Moving File to outputSaveDir.");
+            try {
+                Path outputPath = Paths.get(outputDir + "/" + fileName);
+                Path outputSavePath = Paths.get(outputDir + "/" + outputSaveDir + "/" + fileName);
+                Files.move(outputPath, outputSavePath);
+            } catch (IOException i) {
+                log.error("Failed to move File to outputSaveDir: "
+                        + i.toString());
+            }
         } catch (UploadReportException e) {
             log.error("Failed to deliver report: " + e.toString());
+            log.error("Moving File to outputErrorDir.");
+            try {
+                Path outputPath = Paths.get(outputDir + "/" + fileName);
+                Path outputErrorPath = Paths.get(outputDir + "/" + outputErrorDir + "/"
+                        + fileName);
+                Files.move(outputPath, outputErrorPath);
+            } catch (IOException i) {
+                log.error("Failed to move File to outputErrorDir: "
+                        + i.toString());
+            }
         }
 
         return;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     public void deliverReport(ReportType report)
             throws UploadReportException {
         if (!initialized) {
             // Necessary because the servlet context is not accessible in ctor
             init();
         }
-
 
 
         try {
@@ -234,19 +357,19 @@ public class UploadReport implements UploadReportInterface {
      * according name.
      *
      * @param element the {@link org.w3c.dom.Element} to be validated.
-     * @throws org.xml.sax.SAXException if the Dokpool schema file cannot be
-     * parsed.
+     * @throws org.xml.sax.SAXException     if the Dokpool schema file cannot be
+     *                                      parsed.
      * @throws javax.xml.bind.JAXBException if an error was encountered
-     * while creating the JAXBContext.
+     *                                      while creating the JAXBContext.
      */
     public void validateMeta(Element element)
-        throws SAXException, JAXBException {
+            throws SAXException, JAXBException {
         if (!(element.getTagName().endsWith(DOKPOOL_ELEMENT_NAME))) {
             log.debug("Ignoring Annotation element: " + element.getTagName());
             return;
         }
         SchemaFactory schemaFactory = SchemaFactory.newInstance(
-            XMLConstants.W3C_XML_SCHEMA_NS_URI);
+                XMLConstants.W3C_XML_SCHEMA_NS_URI);
         Schema schema = schemaFactory.newSchema(dokpoolSchemaFile);
         JAXBContext jaxbContext = JAXBContext.newInstance(DokpoolMeta.class);
 
@@ -263,25 +386,25 @@ public class UploadReport implements UploadReportInterface {
      * @throws UploadReportException if report validation failed.
      */
     protected void validateReport(ReportType report)
-        throws UploadReportException {
+            throws UploadReportException {
         try {
             SchemaFactory schemaFactory = SchemaFactory.newInstance(
-                XMLConstants.W3C_XML_SCHEMA_NS_URI);
+                    XMLConstants.W3C_XML_SCHEMA_NS_URI);
             Schema schema = schemaFactory.newSchema(irixSchemaFile);
             JAXBContext jaxbContext = JAXBContext.newInstance(
-                ReportType.class);
+                    ReportType.class);
 
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setSchema(schema);
             marshaller.marshal(new ObjectFactory().createReport(report),
-                new DefaultHandler());
+                    new DefaultHandler());
             AnnexesType annex = report.getAnnexes();
             if (annex != null && annex.getAnnotation() != null) {
-                for (AnnotationType anno: annex.getAnnotation()) {
+                for (AnnotationType anno : annex.getAnnotation()) {
                     if (anno.getAny() == null) {
                         continue;
                     }
-                    for (Element ele: anno.getAny()) {
+                    for (Element ele : anno.getAny()) {
                         if (ele == null) {
                             continue;
                         }
@@ -292,7 +415,7 @@ public class UploadReport implements UploadReportInterface {
         } catch (SAXException | JAXBException e) {
             log.debug("Validation failed: " + e);
             throw new UploadReportException("Failed to validate report: " + e,
-                e);
+                    e);
         }
     }
 }

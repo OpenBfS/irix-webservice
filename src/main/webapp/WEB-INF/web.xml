@@ -24,7 +24,8 @@
 
      <context-param>
          <param-name>storage-dir</param-name>
-         <!-- The directory in which to place the IRIX Reports -->
+         <!-- The directory in which to place the IRIX Reports
+         Sucesfully created files with deliveryErrors will be placed into ./deliveryError -->
          <param-value>/tmp/irix-reports</param-value>
      </context-param>
 

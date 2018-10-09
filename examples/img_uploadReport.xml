@@ -20,10 +20,10 @@
             <arg0 version="1.0">
                 <id:Identification>
                     <id:OrganisationReporting>irix.test.de</id:OrganisationReporting>
-                    <id:DateAndTimeOfCreation>2017-11-03T13:15:48Z</id:DateAndTimeOfCreation>
+                    <id:DateAndTimeOfCreation>2018-09-03T13:15:48Z</id:DateAndTimeOfCreation>
                     <id:ReportContext>Test</id:ReportContext>
                     <id:SequenceNumber>42</id:SequenceNumber>
-                    <id:ReportUUID>2925387a-aa9e-456e-9a36-ca6336de7391</id:ReportUUID>
+                    <id:ReportUUID>8888889e-5a9e-451e-9a36-ca7336d57392</id:ReportUUID>
                     <id:Confidentiality>Free for Public Use</id:Confidentiality>
                     <id:ReportingBases>
                         <id:ReportingBasis>EU Council Decision 87/600/EURATOM</id:ReportingBasis>
@@ -44,23 +44,24 @@
                 </id:Identification>
                 <annex:Annexes>
                     <annex:Annotation>
-                        <annex:Title>IRIX image ☢ CURL Test Request</annex:Title>
+                        <annex:Title>IRIX image Test Request NO Scenarios yet 2018-10-05_001</annex:Title>
                         <DokpoolMeta xmlns="http://www.bfs.de/IRIX/Extensions/Dokpool">
-                            <Purpose>Standard-Info</Purpose>
+                            <Purpose>Standard-Info DWD</Purpose>
                             <DokpoolContentType>gammadoserate</DokpoolContentType>
                             <DokpoolName>bund</DokpoolName>
-                            <DokpoolGroupFolder>bund_auto-messungen/automatisch-intern</DokpoolGroupFolder>
+                            <DokpoolGroupFolder>bund_e-messzentrale-bfs/messungen/automatisch</DokpoolGroupFolder>
                             <DokpoolPrivateFolder>rb-fr</DokpoolPrivateFolder>
                             <DokpoolTransferFolder/>
                             <IsElan>true</IsElan>
-                            <IsDoksys>false</IsDoksys>
-                            <IsRodos>false</IsRodos>
-                            <IsRei>false</IsRei>
+                            <IsDoksys>true</IsDoksys>
+                            <IsRodos>true</IsRodos>
+                            <IsRei>true</IsRei>
                             <ElanScenarios>
                                 <ElanScenario>routinemode</ElanScenario>
+                                <ElanScenario>testereignis-abc</ElanScenario>
                             </ElanScenarios>
                             <NetworkOperator>U - BFS (ABI)</NetworkOperator>
-                            <SampleTypeId>L5</SampleTypeId>
+                            <SampleTypeId>L43</SampleTypeId>
                             <SampleType>L5 - Niederschlag</SampleType>
                             <Dom>Gamma-Spektrometrie</Dom>
                             <DataType>LaDa</DataType>
@@ -74,8 +75,8 @@
                         </annex:Text>
                     </annex:Annotation>
                     <annex:FileEnclosure>
-                        <annex:Title>IRIX image ☢ Respond Test request 1_legend</annex:Title>
-                        <annex:FileName>IRIX image ☢ Respond Test request 1_legend.png</annex:FileName>
+                        <annex:Title>IRIX image Respond Test request 1_legend</annex:Title>
+                        <annex:FileName>IRIX image Respond Test request 1_legend.png</annex:FileName>
                         <annex:MimeType>image/png</annex:MimeType>
                         <annex:FileSize>7028</annex:FileSize>
                         <annex:FileHash Algorithm="SHA-1">2F0753A0D03AB78AE4FA4E8848776ED912A300E2</annex:FileHash>
@@ -84,8 +85,8 @@
                         </annex:EnclosedObject>
                     </annex:FileEnclosure>
                     <annex:FileEnclosure>
-                        <annex:Title>IRIX image ☢ Respond Test request 2_map</annex:Title>
-                        <annex:FileName>IRIX image ☢ Respond Test request 2_map.png</annex:FileName>
+                        <annex:Title>IRIX image Respond Test request 2_map</annex:Title>
+                        <annex:FileName>IRIX image Respond Test request 2_map.png</annex:FileName>
                         <annex:MimeType>image/png</annex:MimeType>
                         <annex:FileSize>7028</annex:FileSize>
                         <annex:FileHash Algorithm="SHA-1">2F0753A0D03AB78AE4FA4E8848776ED912A300E2</annex:FileHash>
@@ -94,8 +95,8 @@
                         </annex:EnclosedObject>
                     </annex:FileEnclosure>
                     <annex:FileEnclosure>
-                        <annex:Title>IRIX image ☢ Respond Test request 3</annex:Title>
-                        <annex:FileName>IRIX image ☢ Respond Test request 3.pdf</annex:FileName>
+                        <annex:Title>IRIX image Respond Test request 3</annex:Title>
+                        <annex:FileName>IRIX image Respond Test request 3.pdf</annex:FileName>
                         <annex:MimeType>application/pdf</annex:MimeType>
                         <annex:FileSize>4613</annex:FileSize>
                         <annex:FileHash Algorithm="SHA-1">89A67B76CF699FD8692B45102DD6503AC1A1600A</annex:FileHash>
@@ -104,8 +105,8 @@
                         </annex:EnclosedObject>
                     </annex:FileEnclosure>
                     <annex:FileEnclosure>
-                        <annex:Title>IRIX image ☢ Respond Test request 4</annex:Title>
-                        <annex:FileName>IRIX image ☢ Respond Test request 4.svg</annex:FileName>
+                        <annex:Title>IRIX image Respond Test request 4</annex:Title>
+                        <annex:FileName>IRIX image Respond Test request 4.svg</annex:FileName>
                         <annex:MimeType>image/svg+xml</annex:MimeType>
                         <annex:FileSize>120</annex:FileSize>
                         <annex:FileHash Algorithm="SHA-1">B2E7AF027297561C53C634B629C168C681CB4AE1</annex:FileHash>
@@ -114,8 +115,8 @@
                         </annex:EnclosedObject>
                     </annex:FileEnclosure>
                     <annex:FileEnclosure>
-                        <annex:Title>IRIX image ☢ Respond Test request 5</annex:Title>
-                        <annex:FileName>IRIX image ☢ Respond Test request 5.png</annex:FileName>
+                        <annex:Title>IRIX image Respond Test request 5</annex:Title>
+                        <annex:FileName>IRIX image Respond Test request 5.png</annex:FileName>
                         <annex:MimeType>image/png</annex:MimeType>
                         <annex:FileSize>60843</annex:FileSize>
                         <annex:FileHash Algorithm="SHA-1">C0CF57957B2AFC8EB5DFAD50ED7E688B91BD4FFD</annex:FileHash>
