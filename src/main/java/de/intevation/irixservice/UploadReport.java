@@ -131,7 +131,7 @@ public class UploadReport implements UploadReportInterface {
             sc = (ServletContext) context.getMessageContext().get(
                     MessageContext.SERVLET_CONTEXT);
         } catch (IllegalStateException e) {
-            System.err.println("Failed to get servlet context.");
+            log.error("Failed to get servlet context.");
             throw new UploadReportException(
                     "Failed to get servlet context.", e);
         }
@@ -158,10 +158,14 @@ public class UploadReport implements UploadReportInterface {
                 bfsIrixBrokerProperties.load(stream);
                 stream.close();
             } catch (IOException ioe) {
-                return;
+                log.error("Failed to load bfsIrixBrokerProperties.");
+                throw new UploadReportException(
+                        "Failed to get servlet context.", ioe);
             }
         } catch (Exception e) {
-            log.debug(e.toString());
+            log.error("Failed to init() UploadReport: ", e);
+            throw new UploadReportException(
+                    "Failed to init() UploadReport.", e);
         }
 
         initialized = true;
