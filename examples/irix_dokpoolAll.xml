@@ -6,10 +6,10 @@
       <arg0 version="1.0">
         <id:Identification xmlns:ns15="http://www.w3.org/2000/09/xmldsig#">
         <id:OrganisationReporting>irix.test.de</id:OrganisationReporting>
-        <id:DateAndTimeOfCreation>2018-12-06T10:18:12Z</id:DateAndTimeOfCreation>
+        <id:DateAndTimeOfCreation>2018-12-07T15:57:05Z</id:DateAndTimeOfCreation>
         <id:ReportContext>Test</id:ReportContext>
         <id:SequenceNumber>42</id:SequenceNumber>
-        <id:ReportUUID>84b8e5f0-52a6-4bcf-b29a-69e6d29662dc</id:ReportUUID>
+        <id:ReportUUID>a2573cce-b42d-43fd-aa8b-e4580d768c6d</id:ReportUUID>
         <id:Confidentiality>Free for Public Use</id:Confidentiality>
         <id:ReportingBases>
             <id:ReportingBasis>EU Council Decision 87/600/EURATOM</id:ReportingBasis>
@@ -31,23 +31,27 @@
         <annex:Annotation>
             <annex:Title>IRIX Image Upload Test requÄst with (☢).</annex:Title>
             <DokpoolMeta xmlns="http://www.bfs.de/IRIX/Extensions/Dokpool">
-                <Purpose>Standard-Info</Purpose>
-                <DokpoolContentType>rodosFooBar</DokpoolContentType>
+                <DokpoolContentType>rodosprojection</DokpoolContentType>
                 <DokpoolName>bund</DokpoolName>
                 <DokpoolGroupFolder>bund_e-messzentrale-bfs/messungen/automatisch</DokpoolGroupFolder>
                 <DokpoolPrivateFolder>rb-fr</DokpoolPrivateFolder>
                 <DokpoolTransferFolder/>
+                <Subjects>
+                    <Subject>FooSubject</Subject>
+                    <Subject>Bar subject</Subject>
+                </Subjects>
                 <IsElan>true</IsElan>
                 <IsDoksys>true</IsDoksys>
                 <IsRodos>true</IsRodos>
                 <IsRei>true</IsRei>
                 <ELAN>
-                    <ElanScenarios>
-                        <ElanScenario>routinemode</ElanScenario>
-                        <ElanScenario>ereignis-abc</ElanScenario>
-                    </ElanScenarios>
+                    <Scenarios>
+                        <Scenario>routinemode</Scenario>
+                        <Scenario>ereignis-abc</Scenario>
+                    </Scenarios>
                 </ELAN>
                 <DOKSYS>
+                    <Purpose>Standard-Info</Purpose>
                     <NetworkOperator>U - BFS (ABI)</NetworkOperator>
                     <SampleTypeId>L5</SampleTypeId>
                     <SampleType>L5 - Niederschlag</SampleType>
@@ -75,6 +79,7 @@
                     <ProjectChain>EmergencyLite</ProjectChain>
                     <WorkingMode>Exercise</WorkingMode>
                     <Prognosis>
+                        <Type>DWD</Type>
                         <Provider>Deutscher_Wetterdienst_DWD</Provider>
                         <Meteo>nwp</Meteo>
                         <Date>2018-10-23T06:00:00Z</Date>
@@ -102,6 +107,7 @@
 <Name>FOO-1</Name>
 <Longitude>42.0</Longitude>
 <Latitude>42.0</Latitude>
+<VentHeight>35.0</VentHeight>
                             </Block>
                         </Sourceterm>
                         <Sourceterm>
@@ -117,26 +123,21 @@
 <Special>0.0</Special>
                             </Activity>
                             <Block>
-<Name>FOO-1</Name>
+<Name>FOO-2</Name>
 <Longitude>41.0</Longitude>
 <Latitude>43.0</Latitude>
+<VentHeight>30.0</VentHeight>
                             </Block>
                         </Sourceterm>
                     </Sourceterms>
                 </RODOS>
                 <REI>
-                    <Revision>false</Revision>
-                    <LegalBase>REI-I</LegalBase>
+                    <Revision>7</Revision>
                     <Year>2009</Year>
                     <Quarter>3</Quarter>
                     <Period>Q3</Period>
-                    <SamplingBegin>2018-03-31T22:00:00Z</SamplingBegin>
-                    <SamplingEnd>2018-06-29T22:00:00Z</SamplingEnd>
-                    <SampleType>Abwasser</SampleType>
-                    <NetworkOperator>Bayern</NetworkOperator>
                     <PDFVersion>PDF/A-1b</PDFVersion>
                     <Location>KKW Grafenrheinfeld</Location>
-                    <Purpose>REI</Purpose>
                     <SigningComment>REI signing comment after validation</SigningComment>
                     <Signed>true</Signed>
                     <SigningDate>2018-11-16T16:19:55Z</SigningDate>
