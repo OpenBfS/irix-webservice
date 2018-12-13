@@ -5,28 +5,31 @@
     <irixws:uploadReport xmlns:irixws="http://irixservice.intevation.de/" xmlns:w3c="http://www.w3.org/2000/09/xmldsig#" xmlns:id="http://www.iaea.org/2012/IRIX/Format/Identification" xmlns:base="http://www.iaea.org/2012/IRIX/Format/Base" xmlns:resp="http://www.iaea.org/2012/IRIX/Format/ResponseActions" xmlns:req="http://www.iaea.org/2012/IRIX/Format/Requests" xmlns:meteo="http://www.iaea.org/2012/IRIX/Format/Meteorology" xmlns:medical="http://www.iaea.org/2012/IRIX/Format/MedicalInformation" xmlns:cons="http://www.iaea.org/2012/IRIX/Format/ConsequenceInformation" xmlns:annex="http://www.iaea.org/2012/IRIX/Format/Annexes" xmlns:media="http://www.iaea.org/2012/IRIX/Format/MediaInformation" xmlns:release="http://www.iaea.org/2012/IRIX/Format/ReleaseInformation" xmlns:loc="http://www.iaea.org/2012/IRIX/Format/Locations" xmlns:event="http://www.iaea.org/2012/IRIX/Format/EventInformation" xmlns:meas="http://www.iaea.org/2012/IRIX/Format/Measurements" version="1.0">
       <arg0 version="1.0">
         <id:Identification xmlns:ns15="http://www.w3.org/2000/09/xmldsig#">
-        <id:OrganisationReporting>irix.test.de</id:OrganisationReporting>
-        <id:DateAndTimeOfCreation>2018-12-07T15:57:05Z</id:DateAndTimeOfCreation>
-        <id:ReportContext>Test</id:ReportContext>
-        <id:SequenceNumber>42</id:SequenceNumber>
-        <id:ReportUUID>a2573cce-b42d-43fd-aa8b-e4580d768c6d</id:ReportUUID>
-        <id:Confidentiality>Free for Public Use</id:Confidentiality>
-        <id:ReportingBases>
-            <id:ReportingBasis>EU Council Decision 87/600/EURATOM</id:ReportingBasis>
-            <id:ReportingBasis>Convention on Early Notification of a Nuclear Accident, Article 2</id:ReportingBasis>
-            <id:ReportingBasis>ESD</id:ReportingBasis>
-        </id:ReportingBases>
-        <id:Identifications>
-            <base:PersonContactInfo>
-                <base:Name>Testuser</base:Name>
-            </base:PersonContactInfo>
-            <base:OrganisationContactInfo>
-                <base:Name>TestOrg</base:Name>
-                <base:OrganisationID>irix.test.de</base:OrganisationID>
-                <base:Country>DE</base:Country>
-            </base:OrganisationContactInfo>
-        </id:Identifications>
-    </id:Identification>
+            <id:OrganisationReporting>irix.test.de</id:OrganisationReporting>
+            <id:DateAndTimeOfCreation>2018-12-07T15:57:05Z</id:DateAndTimeOfCreation>
+            <id:ReportContext>Test</id:ReportContext>
+            <id:SequenceNumber>42</id:SequenceNumber>
+            <id:ReportUUID>a2573cce-b42d-43fd-aa8b-e4580d768c6d</id:ReportUUID>
+            <id:Confidentiality>Free for Public Use</id:Confidentiality>
+            <id:ReportingBases>
+                <id:ReportingBasis>EU Council Decision 87/600/EURATOM</id:ReportingBasis>
+                <id:ReportingBasis>Convention on Early Notification of a Nuclear Accident, Article 2</id:ReportingBasis>
+                <id:ReportingBasis>ESD</id:ReportingBasis>
+            </id:ReportingBases>
+            <!--<id:ContactPerson>mlechner@bfs.de</id:ContactPerson>-->
+            <id:Identifications>
+                <base:PersonContactInfo>
+                    <base:Name>lem-fr</base:Name>
+                    <base:UserID>mlechner@bfs.de</base:UserID>
+                    <base:EmailAddress>mlechner@bfs.de</base:EmailAddress>
+                </base:PersonContactInfo>
+                <base:OrganisationContactInfo>
+                    <base:Name>TestOrg</base:Name>
+                    <base:OrganisationID>irix.test.de</base:OrganisationID>
+                    <base:Country>DE</base:Country>
+                </base:OrganisationContactInfo>
+            </id:Identifications>
+        </id:Identification>
         <annex:Annexes xmlns:ns15="http://www.w3.org/2000/09/xmldsig#">
         <annex:Annotation>
             <annex:Title>IRIX Image Upload Test requÄst with (☢).</annex:Title>
