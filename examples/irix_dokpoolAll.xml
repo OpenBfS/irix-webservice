@@ -39,6 +39,7 @@
                 <DokpoolGroupFolder>bund_e-messzentrale-bfs/messungen/automatisch</DokpoolGroupFolder>
                 <DokpoolPrivateFolder>rb-fr</DokpoolPrivateFolder>
                 <DokpoolTransferFolder/>
+                <DokpoolDocumentOwner>rb-fr</DokpoolDocumentOwner>
                 <Subjects>
                     <Subject>FooSubject</Subject>
                     <Subject>Bar subject</Subject>
