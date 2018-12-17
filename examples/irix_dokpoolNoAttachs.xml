@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:irix="http://www.iaea.org/2012/IRIX/Format">
+  <soapenv:Header/>
+  <soapenv:Body>
+    <irixws:uploadReport xmlns:irixws="http://irixservice.intevation.de/" xmlns:w3c="http://www.w3.org/2000/09/xmldsig#" xmlns:id="http://www.iaea.org/2012/IRIX/Format/Identification" xmlns:base="http://www.iaea.org/2012/IRIX/Format/Base" xmlns:resp="http://www.iaea.org/2012/IRIX/Format/ResponseActions" xmlns:req="http://www.iaea.org/2012/IRIX/Format/Requests" xmlns:meteo="http://www.iaea.org/2012/IRIX/Format/Meteorology" xmlns:medical="http://www.iaea.org/2012/IRIX/Format/MedicalInformation" xmlns:cons="http://www.iaea.org/2012/IRIX/Format/ConsequenceInformation" xmlns:annex="http://www.iaea.org/2012/IRIX/Format/Annexes" xmlns:media="http://www.iaea.org/2012/IRIX/Format/MediaInformation" xmlns:release="http://www.iaea.org/2012/IRIX/Format/ReleaseInformation" xmlns:loc="http://www.iaea.org/2012/IRIX/Format/Locations" xmlns:event="http://www.iaea.org/2012/IRIX/Format/EventInformation" xmlns:meas="http://www.iaea.org/2012/IRIX/Format/Measurements" version="1.0">
+      <arg0 version="1.0">
+        <id:Identification xmlns:ns15="http://www.w3.org/2000/09/xmldsig#">
+        <id:OrganisationReporting>irix.test.de</id:OrganisationReporting>
+        <id:DateAndTimeOfCreation>2018-12-17T09:12:55Z</id:DateAndTimeOfCreation>
+        <id:ReportContext>Test</id:ReportContext>
+        <id:SequenceNumber>42</id:SequenceNumber>
+        <id:ReportUUID>82b74ed7-4eab-49e5-a081-450e2110a01f</id:ReportUUID>
+        <id:Confidentiality>Free for Public Use</id:Confidentiality>
+        <id:ReportingBases>
+            <id:ReportingBasis>EU Council Decision 87/600/EURATOM</id:ReportingBasis>
+            <id:ReportingBasis>Convention on Early Notification of a Nuclear Accident, Article 2</id:ReportingBasis>
+            <id:ReportingBasis>ESD</id:ReportingBasis>
+        </id:ReportingBases>
+        <id:Identifications>
+            <base:PersonContactInfo>
+                <base:Name>Testuser</base:Name>
+            </base:PersonContactInfo>
+            <base:OrganisationContactInfo>
+                <base:Name>TestOrg</base:Name>
+                <base:OrganisationID>irix.test.de</base:OrganisationID>
+                <base:Country>DE</base:Country>
+            </base:OrganisationContactInfo>
+        </id:Identifications>
+    </id:Identification>
+        <annex:Annexes xmlns:ns15="http://www.w3.org/2000/09/xmldsig#">
+        <annex:Annotation>
+            <annex:Title>IRIX Image Upload Test requÄst with (☢).</annex:Title>
+            <DokpoolMeta xmlns="http://www.bfs.de/IRIX/Extensions/Dokpool">
+                <DokpoolContentType>rodosprojection</DokpoolContentType>
+                <DokpoolName>bund</DokpoolName>
+                <DokpoolGroupFolder>bund_e-messzentrale-bfs/messungen/automatisch</DokpoolGroupFolder>
+                <DokpoolPrivateFolder>rb-fr</DokpoolPrivateFolder>
+                <DokpoolTransferFolder/>
+                <DokpoolDocumentOwner>rb-fr</DokpoolDocumentOwner>
+                <Subjects>
+                    <Subject>FooSubject</Subject>
+                    <Subject>Bar subject</Subject>
+                </Subjects>
+                <IsElan>true</IsElan>
+                <IsDoksys>true</IsDoksys>
+                <IsRodos>true</IsRodos>
+                <IsRei>true</IsRei>
+                <ELAN>
+                    <Scenarios>
+                        <Scenario>routinemode</Scenario>
+                        <Scenario>ereignis-abc</Scenario>
+                    </Scenarios>
+                </ELAN>
+                <DOKSYS>
+                    <Purpose>Standard-Info</Purpose>
+                    <NetworkOperator>U - BFS (ABI)</NetworkOperator>
+                    <SampleTypeId>L5</SampleTypeId>
+                    <SampleType>L5 - Niederschlag</SampleType>
+                    <SamplingBegin>2015-05-28T13:35:54Z</SamplingBegin>
+                    <SamplingEnd>2015-05-28T13:52:52Z</SamplingEnd>
+                    <Dom>Gamma-Spektrometrie</Dom>
+                    <DataType>LaDa</DataType>
+                    <TrajectoryStartLocation>Freiburg</TrajectoryStartLocation>
+                    <TrajectoryEndLocation>München</TrajectoryEndLocation>
+                    <TrajectoryStartTime>2016-05-28T13:35:54Z</TrajectoryStartTime>
+                    <TrajectoryEndTime>2016-05-28T13:52:52Z</TrajectoryEndTime>
+                    <LegalBase>AVV IMIS</LegalBase>
+                    <MeasuringProgram>Intensivmessprogramm</MeasuringProgram>
+                    <Status>nicht plausibel</Status>
+                </DOKSYS>
+                <RODOS>
+                    <ProjectComment>foo</ProjectComment>
+                    <Site>BARAKW</Site>
+                    <ReportRunID>a0cd758c-0aa9-155b-685e-bbe7048a57a5</ReportRunID>
+                    <Model>Emergency</Model>
+                    <CalculationId>012345678910</CalculationId>
+                    <CalculationDate>2018-11-16T16:19:55Z</CalculationDate>
+                    <CalculationUser>user1</CalculationUser>
+                    <Projectname>notfallstation-0,25-barakw-nodwd</Projectname>
+                    <ProjectChain>EmergencyLite</ProjectChain>
+                    <WorkingMode>Exercise</WorkingMode>
+                    <Prognosis>
+                        <Type>DWD</Type>
+                        <Provider>Deutscher_Wetterdienst_DWD</Provider>
+                        <Meteo>nwp</Meteo>
+                        <Date>2018-10-23T06:00:00Z</Date>
+                        <Begin>2018-10-23T10:00:00Z</Begin>
+                        <End>2018-10-25T10:00:00Z</End>
+                        <Dates>
+                            <Date>2018-10-23T06:00:00Z</Date>
+                            <Date>2018-10-23T12:00:00Z</Date>
+                        </Dates>
+                    </Prognosis>
+                    <Sourceterms>
+                        <Sourceterm>
+                            <StartRelease>2018-11-16T18:00:00Z</StartRelease>
+                            <EndRelease>2018-11-18T10:00:00Z</EndRelease>
+                            <Label>F6.FOO-BAR</Label>
+                            <Type>normal</Type>
+                            <Comment>Nothing happened at this spot in 1745.</Comment>
+                            <Activity>
+<Noble>1.9E27</Noble>
+<Iodine>1.5E25</Iodine>
+<Aerosol>4.2E23</Aerosol>
+<Special>0.0</Special>
+                            </Activity>
+                            <Block>
+<Name>FOO-1</Name>
+<Longitude>42.0</Longitude>
+<Latitude>42.0</Latitude>
+<VentHeight>35.0</VentHeight>
+                            </Block>
+                        </Sourceterm>
+                        <Sourceterm>
+                            <StartRelease>2018-11-20T18:00:00Z</StartRelease>
+                            <EndRelease>2018-11-21T00:00:00Z</EndRelease>
+                            <Label>F6.BAR-FOO</Label>
+                            <Type>normal</Type>
+                            <Comment>Nothing happened at this spot in 1975.</Comment>
+                            <Activity>
+<Noble>1.9E26</Noble>
+<Iodine>1.5E24</Iodine>
+<Aerosol>4.2E22</Aerosol>
+<Special>0.0</Special>
+                            </Activity>
+                            <Block>
+<Name>FOO-2</Name>
+<Longitude>41.0</Longitude>
+<Latitude>43.0</Latitude>
+<VentHeight>30.0</VentHeight>
+                            </Block>
+                        </Sourceterm>
+                    </Sourceterms>
+                </RODOS>
+                <REI>
+                    <Revision>7</Revision>
+                    <Year>2009</Year>
+                    <Quarter>3</Quarter>
+                    <Period>Q3</Period>
+                    <PDFVersion>PDF/A-1b</PDFVersion>
+                    <Location>KKW Grafenrheinfeld</Location>
+                    <SigningComment>REI signing comment after validation</SigningComment>
+                    <Signed>true</Signed>
+                    <SigningDate>2018-11-16T16:19:55Z</SigningDate>
+                </REI>
+            </DokpoolMeta>
+            <annex:Text>reported by the Dschörman/German Federal Office for Radiation (☢) Protection. &lt;a href='https://entw-imis.lab.bfs.de/gis/#map/1234075/6706481/6|layers/%7B%220790a4e9-7d76-4c37-9843-6be28f80b916%22%3A%7B%22isVisible%22%3A1%2C%22filters%22%3A%5B%7B%22type%22%3A%22pointintime%22%2C%22effectivedatetime%22%3A1509019200000%7D%2C%7B%22type%22%3A%22value%22%2C%22effectivevalue%22%3A%5B%22'BfS'%22%5D%2C%22alias%22%3A%22Messnetz%22%2C%22param%22%3A%22source%22%7D%5D%7D%7D|'&gt;Permalink&lt;/a&gt;</annex:Text>
+        </annex:Annotation>
+    </annex:Annexes>
+      </arg0>
+    </irixws:uploadReport>
+  </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:irix="http://www.iaea.org/2012/IRIX/Format">
+  <soapenv:Header/>
+  <soapenv:Body>
+    <irixws:uploadReport xmlns:irixws="http://irixservice.intevation.de/" xmlns:w3c="http://www.w3.org/2000/09/xmldsig#" xmlns:id="http://www.iaea.org/2012/IRIX/Format/Identification" xmlns:base="http://www.iaea.org/2012/IRIX/Format/Base" xmlns:resp="http://www.iaea.org/2012/IRIX/Format/ResponseActions" xmlns:req="http://www.iaea.org/2012/IRIX/Format/Requests" xmlns:meteo="http://www.iaea.org/2012/IRIX/Format/Meteorology" xmlns:medical="http://www.iaea.org/2012/IRIX/Format/MedicalInformation" xmlns:cons="http://www.iaea.org/2012/IRIX/Format/ConsequenceInformation" xmlns:annex="http://www.iaea.org/2012/IRIX/Format/Annexes" xmlns:media="http://www.iaea.org/2012/IRIX/Format/MediaInformation" xmlns:release="http://www.iaea.org/2012/IRIX/Format/ReleaseInformation" xmlns:loc="http://www.iaea.org/2012/IRIX/Format/Locations" xmlns:event="http://www.iaea.org/2012/IRIX/Format/EventInformation" xmlns:meas="http://www.iaea.org/2012/IRIX/Format/Measurements" version="1.0">
+      <arg0 version="1.0">
+        <id:Identification xmlns:ns15="http://www.w3.org/2000/09/xmldsig#">
+        <id:OrganisationReporting>irix.test.de</id:OrganisationReporting>
+        <id:DateAndTimeOfCreation>2018-12-17T09:12:55Z</id:DateAndTimeOfCreation>
+        <id:ReportContext>Test</id:ReportContext>
+        <id:SequenceNumber>42</id:SequenceNumber>
+        <id:ReportUUID>99999999-4eab-49e5-a081-450e2110a01f</id:ReportUUID>
+        <id:Confidentiality>Free for Public Use</id:Confidentiality>
+        <id:ReportingBases>
+            <id:ReportingBasis>EU Council Decision 87/600/EURATOM</id:ReportingBasis>
+            <id:ReportingBasis>Convention on Early Notification of a Nuclear Accident, Article 2</id:ReportingBasis>
+            <id:ReportingBasis>ESD</id:ReportingBasis>
+        </id:ReportingBases>
+        <id:Identifications>
+            <base:PersonContactInfo>
+                <base:Name>Pressestelle</base:Name>
+            </base:PersonContactInfo>
+            <base:OrganisationContactInfo>
+                <base:Name>TestOrg</base:Name>
+                <base:OrganisationID>irix.test.de</base:OrganisationID>
+                <base:Country>DE</base:Country>
+            </base:OrganisationContactInfo>
+        </id:Identifications>
+    </id:Identification>
+        <annex:Annexes xmlns:ns15="http://www.w3.org/2000/09/xmldsig#">
+        <annex:Annotation>
+            <annex:Title>Pressemitteilung 1 - Test</annex:Title>
+            <DokpoolMeta xmlns="http://www.bfs.de/IRIX/Extensions/Dokpool">
+                <DokpoolContentType>mediarelease</DokpoolContentType>
+                <DokpoolName>bund</DokpoolName>
+                <DokpoolGroupFolder>bund_e-presse-bfs/test</DokpoolGroupFolder>
+                <DokpoolPrivateFolder/>
+                <DokpoolTransferFolder/>
+                <DokpoolDocumentOwner>rb-fr</DokpoolDocumentOwner>
+                <Subjects>
+                    <Subject>PM1</Subject>
+                    <Subject>Pressemitteilung</Subject>
+                </Subjects>
+                <IsElan>true</IsElan>
+                <IsDoksys>false</IsDoksys>
+                <IsRodos>false</IsRodos>
+                <IsRei>false</IsRei>
+                <ELAN>
+                    <Scenarios>
+                        <Scenario>routinemode</Scenario>
+                        <Scenario>ereignis-abc</Scenario>
+                    </Scenarios>
+                </ELAN>
+            </DokpoolMeta>
+            <annex:Text>Ein schöner Pressetext.</annex:Text>
+        </annex:Annotation>
+    </annex:Annexes>
+      </arg0>
+    </irixws:uploadReport>
+  </soapenv:Body>
+</soapenv:Envelope>
