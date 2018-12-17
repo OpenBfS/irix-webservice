@@ -36,7 +36,7 @@
             <DokpoolMeta xmlns="http://www.bfs.de/IRIX/Extensions/Dokpool">
                 <DokpoolContentType>rodosprojection</DokpoolContentType>
                 <DokpoolName>bund</DokpoolName>
-                <DokpoolGroupFolder>bund_e-messzentrale-bfs/messungen/automatisch</DokpoolGroupFolder>
+                <DokpoolGroupFolder>bund_e-messzentrale-bfs/messungen/automatisch/test</DokpoolGroupFolder>
                 <DokpoolPrivateFolder>rb-fr</DokpoolPrivateFolder>
                 <DokpoolTransferFolder/>
                 <DokpoolDocumentOwner>rb-fr</DokpoolDocumentOwner>
@@ -50,8 +50,7 @@
                 <IsRei>true</IsRei>
                 <ELAN>
                     <Scenarios>
-                        <Scenario>routinemode</Scenario>
-                        <Scenario>ereignis-abc</Scenario>
+                        <Scenario>testereignis-abc</Scenario>
                     </Scenarios>
                 </ELAN>
                 <DOKSYS>
