@@ -54,21 +54,22 @@
                     </Scenarios>
                 </ELAN>
                 <DOKSYS>
-                    <Purpose>Standard-Info</Purpose>
-                    <NetworkOperator>U - BFS (ABI)</NetworkOperator>
+                    <Purpose>Standard-Info Bundesmessnetze</Purpose>
+                    <NetworkOperator>ZdB Testnetz</NetworkOperator>
                     <SampleTypeId>L5</SampleTypeId>
-                    <SampleType>L5 - Niederschlag</SampleType>
+                    <SampleType>Niederschlag</SampleType>
                     <SamplingBegin>2015-05-28T13:35:54Z</SamplingBegin>
                     <SamplingEnd>2015-05-28T13:52:52Z</SamplingEnd>
                     <Dom>Gamma-Spektrometrie</Dom>
-                    <DataType>LaDa</DataType>
+                    <DataType>LADA</DataType>
+                    <Type>brutto</Type>
                     <TrajectoryStartLocation>Freiburg</TrajectoryStartLocation>
                     <TrajectoryEndLocation>München</TrajectoryEndLocation>
                     <TrajectoryStartTime>2016-05-28T13:35:54Z</TrajectoryStartTime>
                     <TrajectoryEndTime>2016-05-28T13:52:52Z</TrajectoryEndTime>
                     <LegalBase>AVV IMIS</LegalBase>
                     <MeasuringProgram>Intensivmessprogramm</MeasuringProgram>
-                    <Status>nicht plausibel</Status>
+                    <Status>plausibel</Status>
                 </DOKSYS>
                 <RODOS>
                     <ProjectComment>foo</ProjectComment>
