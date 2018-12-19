@@ -58,15 +58,18 @@
                     <NetworkOperator>ZdB Testnetz</NetworkOperator>
                     <SampleTypeId>L5</SampleTypeId>
                     <SampleType>Niederschlag</SampleType>
-                    <SamplingBegin>2015-05-28T13:35:54Z</SamplingBegin>
-                    <SamplingEnd>2015-05-28T13:52:52Z</SamplingEnd>
+                    <SamplingBegin>2015-05-28T13:35:54+00:00</SamplingBegin>
+                    <SamplingEnd>2015-05-29T13:52:52+02:00</SamplingEnd>
                     <Dom>Gamma-Spektrometrie</Dom>
                     <DataType>LADA</DataType>
-                    <Type>brutto</Type>
+                    <Area>D</Area>
+                    <Duration>1h</Duration>
+                    <OperationMode>Routine</OperationMode>
+                    <InfoType>brutto</InfoType>
                     <TrajectoryStartLocation>Freiburg</TrajectoryStartLocation>
                     <TrajectoryEndLocation>München</TrajectoryEndLocation>
-                    <TrajectoryStartTime>2016-05-28T13:35:54Z</TrajectoryStartTime>
-                    <TrajectoryEndTime>2016-05-28T13:52:52Z</TrajectoryEndTime>
+                    <TrajectoryStartTime>2016-05-28T13:35:54+00:00</TrajectoryStartTime>
+                    <TrajectoryEndTime>2016-05-28T13:52:52+00:00</TrajectoryEndTime>
                     <LegalBase>AVV IMIS</LegalBase>
                     <MeasuringProgram>Intensivmessprogramm</MeasuringProgram>
                     <Status>plausibel</Status>
