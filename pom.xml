@@ -147,8 +147,8 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <license>GPL (c) 2005, SWWDC</license>
-                    <distribution>Trash 2005</distribution>
+                    <license>GPL (c) 2019, BfS - german Federal Office for Radiation Protection</license>
+                    <distribution>el7</distribution>
                     <group>Application/Collectors</group>
                     <mappings>
                         <mapping>
