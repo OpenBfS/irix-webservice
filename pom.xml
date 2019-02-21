@@ -147,10 +147,10 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <license>GPL (c) 2019, BfS - german Federal Office for Radiation Protection</license>
+                    <license>GPLv3 (c) 2019, BfS - German Federal Office for Radiation Protection</license>
                     <distribution>el7</distribution>
                     <group>Applications/Internet</group>
-                    <description>FooBar</description>
+                    <description>Webservice to process and deliver IRIX Documents. IRIX is the International Radiological Information eXchange format standard developed by the IAEA.</description>
                     <mappings>
                         <mapping>
                             <directory>/var/lib/tomcat/webapps/${project.artifactId}</directory>
@@ -165,7 +165,7 @@
                         </mapping>
                     </mappings>
                     <!--<preinstallScriptlet>
-                                                 <script>echo "installing ${project.name} now"</script>
+                        <script>echo "installing ${project.name} now"</script>
                     </preinstallScriptlet>
                     <postinstallScriptlet>
                         <scriptFile>src/main/scripts/postinstall</scriptFile>
