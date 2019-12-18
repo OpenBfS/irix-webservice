@@ -348,6 +348,7 @@ public class UploadReport implements UploadReportInterface {
         try {
             IrixBroker dib = new de.bfs.irixbroker
                     .IrixBroker(bfsIrixBrokerProperties);
+            // NOW leaving irix-webservice here and entering irix-broker
             dib.deliverIrixBroker(report);
         } catch (Exception e) {
             throw new UploadReportException("IrixBrokerException: " + e, e);
