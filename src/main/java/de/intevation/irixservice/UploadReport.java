@@ -8,11 +8,12 @@
 
 package de.intevation.irixservice;
 
-import javax.jws.WebService;
-import javax.annotation.Resource;
-import javax.xml.ws.WebServiceContext;
-import javax.xml.ws.handler.MessageContext;
+import jakarta.jws.WebService;
+import jakarta.annotation.Resource;
+import jakarta.xml.ws.WebServiceContext;
+import jakarta.xml.ws.handler.MessageContext;
 
+//still exists in Java 21
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.XMLConstants;
@@ -37,12 +38,12 @@ import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.util.Properties;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -50,7 +51,7 @@ import org.apache.log4j.PropertyConfigurator;
 import org.w3c.dom.Element;
 
 /**
- * {@link javax.jws.WebService} interface implementation for uploading
+ * {@link jakarta.jws.WebService} interface implementation for uploading
  * IRIX-XML reports.
  */
 @WebService(
@@ -365,7 +366,7 @@ public class UploadReport implements UploadReportInterface {
      * @param element the {@link org.w3c.dom.Element} to be validated.
      * @throws org.xml.sax.SAXException     if the Dokpool schema file cannot be
      *                                      parsed.
-     * @throws javax.xml.bind.JAXBException if an error was encountered
+     * @throws jakarta.xml.bind.JAXBException if an error was encountered
      *                                      while creating the JAXBContext.
      */
     public void validateMeta(Element element)

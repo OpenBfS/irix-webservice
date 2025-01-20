@@ -8,9 +8,9 @@
 
 package de.intevation.test.irixservice;
 
-import javax.xml.ws.Endpoint;
+import jakarta.xml.ws.Endpoint;
 import javax.xml.namespace.QName;
-import javax.xml.ws.Service;
+import jakarta.xml.ws.Service;
 
 import org.junit.rules.TemporaryFolder;
 import org.junit.Rule;
@@ -40,11 +40,11 @@ import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.PatternLayout;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.Marshaller;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.Marshaller;
 import javax.xml.XMLConstants;
 
 import javax.xml.validation.Schema;
