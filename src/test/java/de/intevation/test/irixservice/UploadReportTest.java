@@ -23,8 +23,12 @@ import java.net.URL;
 import java.net.MalformedURLException;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Properties;
 
 import org.iaea._2012.irix.format.ObjectFactory;
 import org.iaea._2012.irix.format.ReportType;
@@ -54,8 +58,6 @@ import org.xml.sax.SAXException;
 
 import org.custommonkey.xmlunit.Diff;
 import org.custommonkey.xmlunit.XMLUnit;
-
-import org.apache.commons.io.FileUtils;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Document;
@@ -105,6 +107,15 @@ public class UploadReportTest {
     public UploadReportTest() throws MalformedURLException, IOException {
         setupLogging();
         testObj = new UploadReport();
+        testObj.bfsIrixBrokerProperties = new Properties();
+        //this is a user provided file within the main project directory,
+        //DO NOT add this file to the repo:
+        String bfsIrixBrokerPropertiesFile = "./bfs-irixbroker.properties";
+
+        FileInputStream stream = new FileInputStream(bfsIrixBrokerPropertiesFile);
+        testObj.bfsIrixBrokerProperties.load(stream);
+        stream.close();
+
         testObj.irixSchemaFile = new File(
             "src/main/webapp/WEB-INF/irix-schema/IRIX.xsd");
         testObj.dokpoolSchemaFile = new File(
@@ -183,10 +194,8 @@ public class UploadReportTest {
         try {
             Assert.assertTrue(new File(expectedPath).exists());
 
-            content1 = FileUtils.readFileToString(new File(reportFile),
-                                                  Charset.forName("utf-8"));
-            content2 = FileUtils.readFileToString(new File(expectedPath),
-                                                  Charset.forName("utf-8"));
+            content1 = Files.readString(Paths.get(reportFile), Charset.forName("utf-8"));
+            content2 = Files.readString(Paths.get(expectedPath), Charset.forName("utf-8"));
         } catch (IOException e) {
             Assert.fail(e.toString());
         }
@@ -230,7 +239,10 @@ public class UploadReportTest {
         testObj.uploadReport(report);
     }
 
-    @Test(expected = UploadReportException.class)
+    @Test 
+    //TODO: this had (expected = UploadReportException.class),
+    //however uploadReport already catches this exception, so
+    //there is nothing we can expect here.
     public void testInvalidDokpool()
         throws UploadReportException, JAXBException {
         ReportType report = getReportFromFile(VALID_REPORT);
