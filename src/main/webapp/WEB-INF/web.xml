@@ -18,11 +18,6 @@
      </servlet-mapping>
 
      <context-param>
-         <param-name>log4j-properties</param-name>
-         <param-value>/WEB-INF/log4j.properties</param-value>
-     </context-param>
-
-     <context-param>
          <param-name>storage-dir</param-name>
          <!-- The directory in which to place the IRIX Reports
          Sucesfully created files with deliveryErrors will be placed into ./deliveryError -->

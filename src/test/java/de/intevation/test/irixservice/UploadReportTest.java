@@ -39,10 +39,7 @@ import de.intevation.irixservice.UploadReportException;
 
 import javax.xml.transform.dom.DOMResult;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.PatternLayout;
+import static java.lang.System.Logger.Level.DEBUG;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
@@ -65,7 +62,7 @@ import org.w3c.dom.Document;
 import de.bfs.irix.extensions.dokpool.DokpoolMeta;
 
 public class UploadReportTest {
-    private static Logger log = Logger.getLogger(UploadReportTest.class);
+    private static System.Logger log = System.getLogger(UploadReportTest.class.getName());
 
     /** This is an example report from the irix-client.*/
     private static final String VALID_REPORT =
@@ -95,17 +92,7 @@ public class UploadReportTest {
     public void tearDown() {
     }
 
-    private void setupLogging() {
-        ConsoleAppender console = new ConsoleAppender(); //create appender
-        String pattern = "[%p|%C{1}] %m%n";
-        console.setLayout(new PatternLayout(pattern));
-        console.setThreshold(Level.ERROR); // Change here for testing ;-)
-        console.activateOptions();
-        Logger.getRootLogger().addAppender(console);
-    }
-
     public UploadReportTest() throws MalformedURLException, IOException {
-        setupLogging();
         testObj = new UploadReport();
         testObj.bfsIrixBrokerProperties = new Properties();
         //this is a user provided file within the main project directory,
@@ -137,8 +124,8 @@ public class UploadReportTest {
             JAXBElement obj = (JAXBElement) u.unmarshal(new File(file));
             return (ReportType) obj.getValue();
         } catch (JAXBException | SAXException e) {
-            log.debug("Failed to parse report test data: " + file);
-            log.debug(e);
+            log.log(DEBUG, "Failed to parse report test data: " + file);
+            log.log(DEBUG, e);
             return null;
         }
     }
@@ -206,7 +193,7 @@ public class UploadReportTest {
 
         try {
             Diff diff = new Diff(content1, content2);
-            log.debug("Diff: " + diff.toString());
+            log.log(DEBUG, "Diff: " + diff.toString());
             java.io.PrintWriter writer = new java.io.PrintWriter(
                 "/tmp/" + uuid + ".xml", "UTF-8");
             writer.write(content2);
