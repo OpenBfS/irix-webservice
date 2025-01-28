@@ -20,6 +20,19 @@ target/irix-webservice.war
 
 in the Servlet Container of your choice.
 
+## Testing
+
+For an actual upload to a Dokpool instance, copy the file
+`./src/main/webapp/WEB_INF/bfs-irixbroker.properties` to this
+directory, adapt it to your instance and then run:
+
+```bash
+mvn test
+```
+
+Note that tests will not fail even without `bfs-irixbroker.properties`,
+but you will see exceptions in the logs.
+
 ## Usage
 
 With the default configuration the servlet will
