@@ -62,7 +62,8 @@ import org.w3c.dom.Document;
 import de.bfs.irix.extensions.dokpool.DokpoolMeta;
 
 public class UploadReportTest {
-    private static System.Logger log = System.getLogger(UploadReportTest.class.getName());
+    private static System.Logger log =
+        System.getLogger(UploadReportTest.class.getName());
 
     /** This is an example report from the irix-client.*/
     private static final String VALID_REPORT =
@@ -99,7 +100,8 @@ public class UploadReportTest {
         //DO NOT add this file to the repo:
         String bfsIrixBrokerPropertiesFile = "./bfs-irixbroker.properties";
 
-        FileInputStream stream = new FileInputStream(bfsIrixBrokerPropertiesFile);
+        FileInputStream stream =
+            new FileInputStream(bfsIrixBrokerPropertiesFile);
         testObj.bfsIrixBrokerProperties.load(stream);
         stream.close();
 
@@ -181,8 +183,10 @@ public class UploadReportTest {
         try {
             Assert.assertTrue(new File(expectedPath).exists());
 
-            content1 = Files.readString(Paths.get(reportFile), Charset.forName("utf-8"));
-            content2 = Files.readString(Paths.get(expectedPath), Charset.forName("utf-8"));
+            content1 = Files.readString(Paths.get(reportFile),
+                Charset.forName("utf-8"));
+            content2 = Files.readString(Paths.get(expectedPath),
+                Charset.forName("utf-8"));
         } catch (IOException e) {
             Assert.fail(e.toString());
         }
@@ -226,7 +230,7 @@ public class UploadReportTest {
         testObj.uploadReport(report);
     }
 
-    @Test 
+    @Test
     //TODO: this had (expected = UploadReportException.class),
     //however uploadReport already catches this exception, so
     //there is nothing we can expect here.

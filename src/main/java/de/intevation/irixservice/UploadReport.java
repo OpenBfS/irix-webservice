@@ -60,7 +60,8 @@ import org.w3c.dom.Element;
         endpointInterface = "de.intevation.irixservice.UploadReportInterface")
 public class UploadReport implements UploadReportInterface {
 
-    private static System.Logger log = System.getLogger(UploadReport.class.getName());
+    private static System.Logger log =
+        System.getLogger(UploadReport.class.getName());
 
     /**
      * Path to the irixSchema xsd file.
@@ -183,7 +184,8 @@ public class UploadReport implements UploadReportInterface {
             log.log(DEBUG, "creating directory: " + theDir.getAbsolutePath());
             try {
                 theDir.mkdir();
-                log.log(DEBUG, "Created directory: " + theDir.getAbsolutePath());
+                log.log(DEBUG, "Created directory: "
+                    + theDir.getAbsolutePath());
             } catch (SecurityException se) {
                 log.log(ERROR, "Failed to create output directory.");
                 throw new UploadReportException("Service misconfigured.", se);
@@ -296,7 +298,8 @@ public class UploadReport implements UploadReportInterface {
                         "Failed to write report to file: '"
                                 + outputDir + "/" + fileName + "'", e);
             } catch (JAXBException e) {
-                log.log(ERROR, "Failed to handle requested report." + e.toString());
+                log.log(ERROR,
+                    "Failed to handle requested report." + e.toString());
                 throw new UploadReportException("Failed to parse the report.",
                         e);
             }
@@ -372,7 +375,8 @@ public class UploadReport implements UploadReportInterface {
     public void validateMeta(Element element)
             throws SAXException, JAXBException {
         if (!(element.getTagName().endsWith(DOKPOOL_ELEMENT_NAME))) {
-            log.log(DEBUG, "Ignoring Annotation element: " + element.getTagName());
+            log.log(DEBUG,
+                "Ignoring Annotation element: " + element.getTagName());
             return;
         }
         SchemaFactory schemaFactory = SchemaFactory.newInstance(
