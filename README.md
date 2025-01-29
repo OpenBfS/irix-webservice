@@ -4,6 +4,11 @@ A Servlet (jakarta.jws.WebService interface implementation) that handles
 IRIXReports and uploads them to specific servers. The actual upload is performed
 by IRIXBroker.
 
+further information:
+
+ - [Changelog](Changelog.md)
+ - [License](LICENSE)
+
 ## Building
 
 To install the webservice simply build it with:
