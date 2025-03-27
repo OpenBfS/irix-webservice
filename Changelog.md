@@ -2,6 +2,11 @@
 
 ## Version 3.x
 
+### 3.2 *2025-03-27*
+
+ - update schema to reflect RODOS changes
+ - corresponding changes in IRIXBroker and dokpool-client (both 3.2.0)
+
 ### 3.1 *2025-01-28*
 
  - jaxws, javax.xml.bind, jaxb to current versions (libs and plugins)
