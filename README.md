@@ -57,18 +57,26 @@ irix-webservice/upload-report?wsdl
 
  - Find example IRIX-xml docs in `./examples` (there are some futher example in `./old_examples`
    that do no longer fit to the current Dokpool XML schema).
+ - To transform irix:Report xml-Files (e.g. as produced as output by irix-client) you can use xsltproc and the
+   irixReport2irixwsUploadReport.xslt in ./examples Folder. Use it like this:
 
 ```bash
+xsltproc -o png-pdf-test-upload.xml ../irixReport2irixwsUploadReport.xslt png-pdf-test.xml
+```
+ - Then send the report to the webservice:
+
+```bash
+URLPREFIX=http://localhost
 curl -X POST -H "Content-Type: text/xml; charset=utf-8" \
     -H 'SOAPAction:"http://irixservice.intevation.de/UploadReportInterface/uploadReportRequest"' \
-    --data @png-pdf-test.xml http://localhost/irix-webservice/upload-report
+    --data @png-pdf-test-upload.xml $URLPREFIX/irix-webservice/upload-report
 ```
 
  - Because dokpool-client refuses to upload a Report having a UUID already imported, the
    <id:ReportUUID>....</id:ReportUUID> has to be edited in the Report, if already succesfully imported.
- - To transform irix:Report xml-Files (e.g. as produced as output by irix-client) you can use xsltproc and the 
-   irixReport2irixwsUploadReport.xslt in ./examples Folder. Use it like this:
+   You can do this in the transformed SOAP request xml by (replaces the first 8 hex characters
+   by a random sequence):
 
 ```bash
-xsltproc -o irixwsReportUpload.xml irixReport2irixwsUploadReport.xslt irixReport.xml
+sed -i "s/<id:ReportUUID>.{8}/<id:ReportUUID>$(xxd -l 4 -p /dev/urandom)/" png-pdf-test-upload.xmll
 ```
