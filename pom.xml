@@ -4,7 +4,7 @@
     <groupId>de.bfs</groupId>
     <artifactId>irix-webservice</artifactId>
     <packaging>war</packaging>
-    <version>3.3-SNAPSHOT</version>
+    <version>3.3.0</version>
     <name>Service to store IRIX Reports</name>
     <organization>
         <name>German Federal Office for Radiation Protection</name>
@@ -61,7 +61,7 @@
         <dependency>
             <groupId>de.bfs</groupId>
             <artifactId>bfs-irixbroker</artifactId>
-            <version>3.3-SNAPSHOT</version>
+            <version>3.3.0</version>
         </dependency>
     </dependencies>
     <build>

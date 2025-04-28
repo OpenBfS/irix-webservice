@@ -2,6 +2,14 @@
 
 ## Version 3.x
 
+### 3.3.0 *2025-04-28*
+
+ - update schema (liberal doksys)
+ - Version 3.3.0 of dokpool-client and IRIXBroker
+   - This fixes an error where event lists with one
+   inactive and one active event where completely rejected.
+   Now the active event is assigned correctly.
+
 ### 3.2 *2025-03-27*
 
  - update schema to reflect RODOS changes
