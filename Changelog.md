@@ -2,6 +2,11 @@
 
 ## Version 3.x
 
+### 3.3.1 *2025-06-23*
+
+ - rethrow IRIXBroker exceptions so they appear in error messages to clients
+ - IRIXBroker now also throws more exceptions because aof the Dokpool Client
+
 ### 3.3.0 *2025-04-28*
 
  - update schema (liberal doksys)
