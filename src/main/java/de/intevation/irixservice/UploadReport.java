@@ -333,6 +333,7 @@ public class UploadReport implements UploadReportInterface {
                 log.log(ERROR, "Failed to move File to outputErrorDir: "
                         + i.toString());
             }
+            throw e;
         }
 
         return;
