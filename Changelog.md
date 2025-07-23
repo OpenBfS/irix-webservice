@@ -2,10 +2,14 @@
 
 ## Version 3.x
 
+### 3.3.2 *2025-07-23*
+
+ - IRIXBroker throws even more exceptions because of the Dokpool Client
+
 ### 3.3.1 *2025-06-23*
 
  - rethrow IRIXBroker exceptions so they appear in error messages to clients
- - IRIXBroker now also throws more exceptions because aof the Dokpool Client
+ - IRIXBroker now also throws more exceptions because of the Dokpool Client
 
 ### 3.3.0 *2025-04-28*
 
