@@ -25,6 +25,12 @@ target/irix-webservice.war
 
 in the Servlet Container of your choice.
 
+To also run the dependency check use:
+
+```
+mvn clean package verify
+```
+
 ## Testing
 
 For an actual upload to a Dokpool instance, copy the file

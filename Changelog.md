@@ -2,6 +2,12 @@
 
 ## Version 3.x
 
+### 3.3.3 *2025-10-xx*
+
+ - bump dependencies (org.xmlunit)
+ - add dependency-check-maven version wity version 12.1.8
+ - because of this, the minimal maven version is now 3.6.3 (used by verify phase)
+
 ### 3.3.2 *2025-07-23*
 
  - IRIXBroker throws even more exceptions because of the Dokpool Client
