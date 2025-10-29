@@ -2,7 +2,7 @@
 
 ## Version 3.x
 
-### 3.3.3 *2025-10-xx*
+### 3.3.3 *2025-10-29*
 
  - bump dependencies (org.xmlunit)
  - add dependency-check-maven version wity version 12.1.8
