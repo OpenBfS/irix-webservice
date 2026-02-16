@@ -2,10 +2,18 @@
 
 ## Version 3.x
 
+### 3.3.4 *2026-02-16*
+
+ - bump irix-broker and dokpool-client version to 3.3.4
+   - use Java's own HttpClient instead of Apache HttpClient
+ - bump jaxb and some maven plugin versions
+ - explicit war plugin version
+ - fix some Javadoc errors
+
 ### 3.3.3 *2025-10-29*
 
  - bump dependencies (org.xmlunit)
- - add dependency-check-maven version wity version 12.1.8
+ - add dependency-check-maven with version 12.1.8
  - because of this, the minimal maven version is now 3.6.3 (used by verify phase)
 
 ### 3.3.2 *2025-07-23*
