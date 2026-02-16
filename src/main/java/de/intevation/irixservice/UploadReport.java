@@ -115,7 +115,7 @@ public class UploadReport implements UploadReportInterface {
     public File dokpoolSchemaFile;
 
     /**
-     * Has {@link this.init()} successfully been called?
+     * Has {@link UploadReport#init()} successfully been called?
      */
     public boolean initialized;
 
