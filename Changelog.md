@@ -2,6 +2,12 @@
 
 ## Version 3.x
 
+### 3.5.0 *2026-06-23*
+
+ - bump irix-broker and dokpool-client version to 3.5.0
+   - this implies the minimum supported Dokpool version is now 2.6
+   - multi-event documents will be split into copies on their way to Dokpool
+
 ### 3.4.0 *2026-04-17*
 
  - bump irix-broker and dokpool-client version to 3.4.0
